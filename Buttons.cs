@@ -12,7 +12,7 @@ public class Buttons : MonoBehaviour {
 
 	void Start(){
 		animSetting = U.Settings.GetComponent<Animation>();
-		animLand = U.Germany_main.GetComponent<Animation>();
+		animLand = U.Land_main.GetComponent<Animation>();
 	}
 
 	void Update(){

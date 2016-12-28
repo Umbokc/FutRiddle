@@ -3,8 +3,8 @@ using System.Collections;
 
 public class U : MonoBehaviour {
 
-	public GameObject _Germany_main;
-	public static GameObject Germany_main;
+	public GameObject _Land_main;
+	public static GameObject Land_main;
 	
 	// the settings elements
 	public GameObject _Settings;
@@ -14,7 +14,7 @@ public class U : MonoBehaviour {
 
 
 	void Awake () {
-		Germany_main = _Germany_main;
+		Land_main = _Land_main;
 		Settings = _Settings;
 	}
 }
