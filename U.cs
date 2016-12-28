@@ -12,9 +12,16 @@ public class U : MonoBehaviour {
 	// if settings is active then 'true'
 	public static bool Settings_active = false;
 
+	public GameObject[] _lands = new GameObject[3];
+	public static GameObject[] lands;
+
+	public static int current = 0;
+
 
 	void Awake () {
 		Land_main = _Land_main;
 		Settings = _Settings;
+		lands = _lands;
+
 	}
 }
