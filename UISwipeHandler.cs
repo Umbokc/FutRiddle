@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 
 public class UISwipeHandler : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, IDragHandler{
 
+	public GameObject check_point;
+	public TextMesh name;
 
 	public void OnBeginDrag(PointerEventData eventData){
 
@@ -11,17 +13,9 @@ public class UISwipeHandler : MonoBehaviour, IBeginDragHandler, IPointerDownHand
 
 		if(Mathf.Abs(delta.x) > Mathf.Abs(delta.y)){
 			if(delta.x > 0){ // to right 
-				if (U.current > 0){
-					MoveLand(5f);
-					U.current--;
-					MoveLand(5f);
-				}
+				if (U.current > 0) MoveLandToSide("right");
 			} else { // to left
-				if (U.current < U.lands.Length-1){
-					MoveLand(-5f);
-					U.current++;
-					MoveLand(-5f);
-				}
+				if (U.current < U.lands.Length-1) MoveLandToSide("left");
 			}
 		} else {
 			if(delta.y > 0){ // to up
@@ -31,15 +25,14 @@ public class UISwipeHandler : MonoBehaviour, IBeginDragHandler, IPointerDownHand
 			}
 		}
 	}
+
 	public void OnDrag(PointerEventData eventData){
-			Debug.Log(U.current);
 
 	}
 	
 	void Update(){
-		Debug.Log(U.current);
+
 	}
-	
 
 	public void OnPointerDown(PointerEventData eventData){
 		
@@ -50,6 +43,28 @@ public class UISwipeHandler : MonoBehaviour, IBeginDragHandler, IPointerDownHand
 		// } else {
 		// 	Debug.Log ("left");
 		// }
+	}
+
+	private void MoveLandToSide(string to_where){
+
+		float x_land = 5f, x_check = 0.3f;
+		int indecr = 1;
+
+		x_check *= (to_where == "right") ? -1 : 1;
+		x_land *= (to_where == "right") ? 1 : -1;
+		indecr *= (to_where == "right") ? -1 : 1;
+
+		Vector3 target = check_point.transform.position;
+		target.x += x_check;
+		check_point.transform.position = target;
+
+
+		MoveLand(x_land);
+		U.current += indecr;
+		MoveLand(x_land);
+		
+		name.text = (U.current == 2) ? "Spain" : (U.current == 1) ? "Germany" : "England" ;
+
 	}
 
 	private void MoveLand(float how){
