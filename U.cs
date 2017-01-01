@@ -23,5 +23,12 @@ public class U : MonoBehaviour {
 		Settings = _Settings;
 		lands = _lands;
 
+		PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
+		PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
+	}
+
+	public static int Money {
+		set { Money_set.SetMoney(value); }
+		get { return PlayerPrefs.GetInt("Money"); } 
 	}
 }

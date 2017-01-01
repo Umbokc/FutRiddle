@@ -37,7 +37,9 @@ public class Buttons : MonoBehaviour {
 					U.Settings_active = !U.Settings_active;
 				}
 				break;
-			case TheButton.FreeCoins: break;
+			case TheButton.FreeCoins: 
+				U.Money = U.Money + 20;
+				break;
 			case TheButton.leaderboard: break;
 			case TheButton.sound: break;
 			case TheButton.about: break;
