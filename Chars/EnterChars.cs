@@ -32,7 +32,9 @@ public class EnterChars : MonoBehaviour {
 			Vector3 crd = new Vector3(x,_ENTER_CHARS_COORDINATE_Y,0); 
 			// U._ENTER_CHARS[i] = Instantiate(entr,crd,Quaternion.identity) as GameObject;
 			GameObject go = Instantiate(entr,crd,Quaternion.identity) as GameObject;
+			go.transform.SetParent (U.TheLevel.transform);
 			U._ENTER_CHARS[i] = go;
+			
 			i++;
 		}
 	}

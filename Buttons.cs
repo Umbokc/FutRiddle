@@ -9,10 +9,12 @@ public class Buttons : MonoBehaviour {
 
 	private Animation animSetting;
 	private Animation animLand;
+	private Animation animLevel;
 
 	void Start(){
 		animSetting = U.Settings.GetComponent<Animation>();
 		animLand = U.Land_main.GetComponent<Animation>();
+		animLevel = U.TheLevel.GetComponent<Animation>();
 	}
 
 	void Update(){
@@ -29,12 +31,27 @@ public class Buttons : MonoBehaviour {
 
 	void OnMouseUpAsButton (){
 		switch (theButton){
-			case TheButton.SelecLevel: break;
+			case TheButton.SelecLevel: 
+				U.UISwipe.SetActive (false);
+				U.Land_main.SetActive(false);
+				U.LevelAllObj.SetActive(true);
+			break;
 			case TheButton.ToSetting:
 				if (!animSetting["ToDown"].enabled){
-					ToSettingAndBack(animSetting);
-					ToSettingAndBack(animLand);
+					
 					U.Settings_active = !U.Settings_active;
+
+					if (U.Settings_active)
+						U.UISwipe.SetActive (false);
+					else 
+						U.UISwipe.SetActive (true);
+
+					ToSettingAndBack(animSetting);
+
+					if (U.TheLevel.active)
+						ToSettingAndBack(animLevel);
+					else
+						ToSettingAndBack(animLand);
 				}
 				break;
 			case TheButton.FreeCoins: 
@@ -48,9 +65,8 @@ public class Buttons : MonoBehaviour {
 	}
 
 	void ToSettingAndBack(Animation anim) {
-
-		anim["ToDown"].time = U.Settings_active ? anim["ToDown"].length : 0;
-		anim["ToDown"].speed = U.Settings_active ? -1 : 1;
+		anim["ToDown"].time = U.Settings_active ? 0 : anim["ToDown"].length;
+		anim["ToDown"].speed = U.Settings_active ? 1 : -1;
 
 		anim.Play ("ToDown");
 	}

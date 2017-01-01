@@ -14,19 +14,44 @@ public class U : MonoBehaviour {
 
 	public GameObject[] _lands = new GameObject[3];
 	public static GameObject[] lands;
-
+	// The current coutry
 	public static int current = 0;
 
+	// Level and other objetc
+	public GameObject _LevelAllObj;
+	public static GameObject LevelAllObj;
+
+	// the level
+	public GameObject _TheLevel;
+	public static GameObject TheLevel;
+	// the sprite of riddle
+	public GameObject _RiddleSprite;
+	public static GameObject RiddleSprite;
+
+	// the swipe area
+	public GameObject _UISwipe;
+	public static GameObject UISwipe;
 
 	public static bool WHILE_TRUE_ANSWER = true;
+
+	public static bool GAME_STARTED = true;
+
 
 	void Awake () {
 		Land_main = _Land_main;
 		Settings = _Settings;
 		lands = _lands;
 
-		PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
-		PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
+		LevelAllObj = _LevelAllObj;
+		TheLevel = _TheLevel;
+		RiddleSprite = _RiddleSprite;
+
+		UISwipe = _UISwipe;
+
+		PlayerPrefs.SetInt("Money", 200);
+		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
+		PlayerPrefs.SetInt("Level", 1);
+		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
 	}
 
 	public static int Money {
