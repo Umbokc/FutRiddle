@@ -30,8 +30,6 @@ public class Money_set : MonoBehaviour {
 
 			set_money = !set_money;
 
-			Debug.Log(numMoney);
-
 			money.text = numMoney.ToString ();
 
 			PlayerPrefs.SetInt("Money",numMoney);

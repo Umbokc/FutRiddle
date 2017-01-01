@@ -31,4 +31,48 @@ public class U : MonoBehaviour {
 		set { Money_set.SetMoney(value); }
 		get { return PlayerPrefs.GetInt("Money"); } 
 	}
+
+	public static int Level {
+		// set { Money_set.SetMoney(value); }
+		get { return PlayerPrefs.GetInt("Level"); } 
+	}
+
+	public static string[] _LEVELS_ANSWER = new string[] {
+											"pogba",
+											"coutinho",
+											"payet",
+											"mahrez",
+											"shaqiri",
+											"silva",
+											"hazard",
+											"benteke",
+											"son",
+											"mane",
+											"wilshere",
+											"fonte",
+											"williams",
+											"negredo",
+											"terry",
+											"foster",
+											"aguero",
+											"morgan",
+											"ozil",
+											"rojo",
+											"deeney",
+											"kone",
+											"luiz",
+											"allen",
+											"eriksen"
+	};
+
+	public static string[] _LEVELS_CHARS = new string[] {
+										"JKVFPIXBGOAYCM",
+										"JKFTHIOBGONUCM",
+										"JAFRHIOZGENUCM",
+										"JAFRHPOTGENYCM",
+										"IAFRHPSTQENYIM"
+	};
+
+	public static GameObject[] _ENTER_CHARS = new GameObject[8] ;
+
 }
