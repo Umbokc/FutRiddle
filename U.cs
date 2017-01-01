@@ -18,6 +18,8 @@ public class U : MonoBehaviour {
 	public static int current = 0;
 
 
+	public static bool WHILE_TRUE_ANSWER = true;
+
 	void Awake () {
 		Land_main = _Land_main;
 		Settings = _Settings;
@@ -73,6 +75,8 @@ public class U : MonoBehaviour {
 										"IAFRHPSTQENYIM"
 	};
 
-	public static GameObject[] _ENTER_CHARS = new GameObject[8] ;
+	public static int What_button_Enter = 0;
+
+	public static GameObject[] _ENTER_CHARS = new GameObject[8];
 
 }
