@@ -24,6 +24,14 @@ public class U : MonoBehaviour {
 	// the level
 	public GameObject _TheLevel;
 	public static GameObject TheLevel;
+
+	// the answer
+	public GameObject _Answer;
+	public static GameObject Answer;
+	// the answer img
+	public GameObject _AnswerImg;
+	public static GameObject AnswerImg;
+	
 	// the sprite of riddle
 	public GameObject _RiddleSprite;
 	public static GameObject RiddleSprite;
@@ -44,6 +52,8 @@ public class U : MonoBehaviour {
 
 		LevelAllObj = _LevelAllObj;
 		TheLevel = _TheLevel;
+		Answer = _Answer;
+		AnswerImg = _AnswerImg;
 		RiddleSprite = _RiddleSprite;
 
 		UISwipe = _UISwipe;
@@ -93,59 +103,19 @@ public class U : MonoBehaviour {
 	};
 
 	// public static string[] _LEVELS_CHARS = new string[] {
-	// 									"JKVFPIXBGOAYCM",
-	// 									"JKFTHIOBGONUCM",
-	// 									"JAFRHIOZGENUCM",
-	// 									"JAFRHPOTGENYCM",
-	// 									"IAFRHPSTQENYIM",
-	// 									"IFARSPHTLENVIM",
-	// 									"IFARSPHZAENDID",
-	// 									"BAFNHKETQENYEM",
-	// 									"IHFVPINSGOAYCM",
-	// 									"JKFTHINAGONECM",
-	// 									"RKFTHIESGEWLCM",
-	// 									"JKFVPTXNGOEYCM",
-	// 									"AKITHIESGLWLCM",
-	// 									"IADRHPEGQENYIO",
-	// 									"JKFRPTXNGOEYCR",
-	// 									"IFARSPHOAENTID",
-	// 									"UFARSPHOAENGIO",
-	// 									"UFARSAHOPMNGIO",
-	// 									"JKFTHINLGONZCM",
-	// 									"JKFTHINLGOORCM",
-	// 									"YFAESAHEPDNGIE",
-	// 									"JKFTEINLGONZCM",
-	// 									"JKFTUINLGONZCZ",
-	// 									"IADRHPESKENYIO",
-	// 									"ILARSPHOAENTLD"
+	// 	"JKVFPIXBGOAYCM", "JKFTHIOBGONUCM", "JAFRHIOZGENUCM", "JAFRHPOTGENYCM", "IAFRHPSTQENYIM",
+	// 	"IFARSPHTLENVIM", "IFARSPHZAENDID", "BAFNHKETQENYEM", "IHFVPINSGOAYCM", "JKFTHINAGONECM",
+	// 	"RKFTHIESGEWLCM", "JKFVPTXNGOEYCM", "AKITHIESGLWLCM", "IADRHPEGQENYIO", "JKFRPTXNGOEYCR",
+	// 	"IFARSPHOAENTID", "UFARSPHOAENGIO", "UFARSAHOPMNGIO", "JKFTHINLGONZCM", "JKFTHINLGOORCM",
+	// 	"YFAESAHEPDNGIE", "JKFTEINLGONZCM", "JKFTUINLGONZCZ", "IADRHPESKENYIO", "ILARSPHOAENTLD"
 	// };
-	
+
 	public static string[] _LEVELS_CHARS = new string[] {
-										"xfompajigckvby",
-										"bjitohcnfmgkuo",
-										"ornzmigfuacehj",
-										"cgranephmyojtf",
-										"nfhmyipasiqter",
-										"vlnertspamfihi",
-										"narfapdziisehd",
-										"nmfhneqakeytbe",
-										"imfgapnhicyosv",
-										"kngfohmijtcnae",
-										"elgfcitkrwsmhe",
-										"mgpoevkcnxyjtf",
-										"gwcheimtliksla",
-										"gheqydepnirioa",
-										"tfcrroypgjnekx",
-										"spnhoerdfatiai",
-										"eoprnasiaogfuh",
-										"mouohraaisgfpn",
-										"jfnlnzchktmgoi",
-										"rtlikhgconfomj",
-										"hpesydainafeeg",
-										"ilnoeknfgjtmcz",
-										"jnltkzonuifzgc",
-										"eohaskdnpriiey",
-										"ophastdnirella"
+		"xfompajigckvby", "bjitohcnfmgkuo", "ornzmigfuacehj", "cgranephmyojtf", "nfhmyipasiqter",
+		"vlnertspamfihi", "narfapdziisehd", "nmfhneqakeytbe", "imfgapnhicyosv", "kngfohmijtcnae",
+		"elgfcitkrwsmhe", "mgpoevkcnxyjtf", "gwcheimtliksla", "gheqydepnirioa", "tfcrroypgjnekx",
+		"spnhoerdfatiai", "eoprnasiaogfuh", "mouohraaisgfpn", "jfnlnzchktmgoi", "rtlikhgconfomj",
+		"hpesydainafeeg", "ilnoeknfgjtmcz", "jnltkzonuifzgc", "eohaskdnpriiey", "ophastdnirella"
 	};
 
 	public static int What_button_Enter = 0;
