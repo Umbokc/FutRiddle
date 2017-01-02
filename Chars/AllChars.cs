@@ -12,7 +12,7 @@ public class AllChars : MonoBehaviour {
 			int TheLevel = PlayerPrefs.GetInt("Level");
 
 			TextMesh TheChar = child.gameObject.GetComponentInChildren<TextMesh>();
-			TheChar.text = U._LEVELS_CHARS[TheLevel-1][i].ToString();
+			TheChar.text = U._LEVELS_CHARS[TheLevel-1][i].ToString().ToUpper();
 			
 			i++;
 		}

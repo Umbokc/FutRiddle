@@ -92,12 +92,60 @@ public class U : MonoBehaviour {
 											"eriksen"
 	};
 
+	// public static string[] _LEVELS_CHARS = new string[] {
+	// 									"JKVFPIXBGOAYCM",
+	// 									"JKFTHIOBGONUCM",
+	// 									"JAFRHIOZGENUCM",
+	// 									"JAFRHPOTGENYCM",
+	// 									"IAFRHPSTQENYIM",
+	// 									"IFARSPHTLENVIM",
+	// 									"IFARSPHZAENDID",
+	// 									"BAFNHKETQENYEM",
+	// 									"IHFVPINSGOAYCM",
+	// 									"JKFTHINAGONECM",
+	// 									"RKFTHIESGEWLCM",
+	// 									"JKFVPTXNGOEYCM",
+	// 									"AKITHIESGLWLCM",
+	// 									"IADRHPEGQENYIO",
+	// 									"JKFRPTXNGOEYCR",
+	// 									"IFARSPHOAENTID",
+	// 									"UFARSPHOAENGIO",
+	// 									"UFARSAHOPMNGIO",
+	// 									"JKFTHINLGONZCM",
+	// 									"JKFTHINLGOORCM",
+	// 									"YFAESAHEPDNGIE",
+	// 									"JKFTEINLGONZCM",
+	// 									"JKFTUINLGONZCZ",
+	// 									"IADRHPESKENYIO",
+	// 									"ILARSPHOAENTLD"
+	// };
+	
 	public static string[] _LEVELS_CHARS = new string[] {
-										"JKVFPIXBGOAYCM",
-										"JKFTHIOBGONUCM",
-										"JAFRHIOZGENUCM",
-										"JAFRHPOTGENYCM",
-										"IAFRHPSTQENYIM"
+										"xfompajigckvby",
+										"bjitohcnfmgkuo",
+										"ornzmigfuacehj",
+										"cgranephmyojtf",
+										"nfhmyipasiqter",
+										"vlnertspamfihi",
+										"narfapdziisehd",
+										"nmfhneqakeytbe",
+										"imfgapnhicyosv",
+										"kngfohmijtcnae",
+										"elgfcitkrwsmhe",
+										"mgpoevkcnxyjtf",
+										"gwcheimtliksla",
+										"gheqydepnirioa",
+										"tfcrroypgjnekx",
+										"spnhoerdfatiai",
+										"eoprnasiaogfuh",
+										"mouohraaisgfpn",
+										"jfnlnzchktmgoi",
+										"rtlikhgconfomj",
+										"hpesydainafeeg",
+										"ilnoeknfgjtmcz",
+										"jnltkzonuifzgc",
+										"eohaskdnpriiey",
+										"ophastdnirella"
 	};
 
 	public static int What_button_Enter = 0;
