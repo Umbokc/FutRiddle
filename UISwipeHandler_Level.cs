@@ -5,6 +5,12 @@ using UnityEngine.EventSystems;
 public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, IDragHandler{
 
 	public TextMesh Level;
+	public GameObject[] Next_Back = new GameObject[2];
+
+
+	void Start (){
+		Check_Start();
+	}
 
 	public void OnBeginDrag(PointerEventData eventData){
 
@@ -22,10 +28,6 @@ public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDo
 	public void OnDrag(PointerEventData eventData){
 
 	}
-	
-	void Update(){
-
-	}
 
 	public void OnPointerDown(PointerEventData eventData){
 		
@@ -36,10 +38,46 @@ public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDo
 		int num = (to_where == "right") ? -1 : 1;
 		U.current_level += num;
 
-		U.AnswerImg.GetComponent<SpriteRenderer>().sprite = U.LevelsImgAnsw[U.current_level-1];
-		Debug.Log(U.current_level + "/" + U.LevelsImg.Length);		
+		switch(U.current_level){
+			case 1: MoveAnwerImg(0); 		break; 		case 2: MoveAnwerImg(0); 		break; 
+			case 3: MoveAnwerImg(-0.23f); 	break; 		case 4: MoveAnwerImg(-0.32f);	break; 
+			case 5: MoveAnwerImg(0.29f); 	break; 		case 6: MoveAnwerImg(-0.31f); 	break;
+			case 7: MoveAnwerImg(0); 		break; 		case 8: MoveAnwerImg(0); 		break; 
+			case 9: MoveAnwerImg(0.18f); 	break; 		case 10: MoveAnwerImg(-0.25f); 	break; 
+			case 11: MoveAnwerImg(-0.43f); 	break; 		case 12: MoveAnwerImg(0.16f); 	break; 
+			case 13: MoveAnwerImg(-0.34f); 	break; 		case 14: MoveAnwerImg(-0.34f); 	break; 
+			case 15: MoveAnwerImg(-0.34f); 	break; 		case 16: MoveAnwerImg(0.45f); 	break; 
+			case 17: MoveAnwerImg(0.09f); 	break; 		case 18: MoveAnwerImg(-0.45f); 	break; 
+			case 19: MoveAnwerImg(0.03f); 	break; 		case 20: MoveAnwerImg(-0.45f); 	break; 
+			case 21: MoveAnwerImg(0); 		break; 		case 22: MoveAnwerImg(0); 		break; 
+			case 23: MoveAnwerImg(0.4f); 	break; 		case 24: MoveAnwerImg(0.23f); 	break; 
+			case 25: MoveAnwerImg(0.23f); 	break; 
+		}
+		
+		Check_Start();
 
 		Level.text = "LEVEL " + U.current_level.ToString();
-		
+	}
+
+	private void MoveAnwerImg(float how_x){
+		Vector3 target = U.AnswerImg.transform.position;
+		target.x = how_x;
+		U.AnswerImg.transform.position = target;
+	}
+
+	private void Check_Start(){
+		U.AnswerImg.GetComponent<SpriteRenderer>().sprite = U.LevelsImgAnsw[U.current_level-1];
+		if (U.current_level == 1) {
+			Next_Back[1].GetComponent<SpriteRenderer>().color = new Vector4(0.5f,0.5f,0.5f,1f);
+			U.Button_Back_Active = false;
+		} else if (U.current_level == U.LevelsImg.Length) {
+			Next_Back[0].GetComponent<SpriteRenderer>().color = new Vector4(0.5f,0.5f,0.5f,1f);
+			U.Button_Next_Active = false;
+		} else {
+			U.Button_Next_Active = true;
+			U.Button_Back_Active = true;
+			Next_Back[0].GetComponent<SpriteRenderer>().color = new Vector4(1f,1f,1f,1f);
+			Next_Back[1].GetComponent<SpriteRenderer>().color = new Vector4(1f,1f,1f,1f);
+		}
 	}
 }

@@ -22,22 +22,31 @@ public class Buttons : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		transform.localScale += new Vector3(0.05f,0.05f,0);
+		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active))
+			return;
+		else
+			transform.localScale += new Vector3(0.05f,0.05f,0);
 	}
 
 	void OnMouseUp(){
-		transform.localScale -= new Vector3(0.05f,0.05f,0);
+		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active))
+			return;
+		else
+			transform.localScale -= new Vector3(0.05f,0.05f,0);
 	}
 
 	void OnMouseUpAsButton (){
 		switch (theButton){
 			case TheButton.SelecLevel: 
 				U.UISwipe.SetActive (false);
+				U.UISwipeLevel.SetActive (true);
+
 				U.Land_main.SetActive (false);
 				U.LevelAllObj.SetActive (true);
 				U.TheLevel.SetActive (false);
+
 				U.Answer.SetActive (true);
-				U.AnswerImg.transform.GetChild (0).gameObject.SetActive (true);
+				U.TheQuestionMark.SetActive (true);
 				break;
 			case TheButton.ToSetting:
 				if (!animSetting["ToDown"].enabled){

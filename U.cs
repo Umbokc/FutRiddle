@@ -52,9 +52,15 @@ public class U : MonoBehaviour {
 	public Sprite[] _LevelsImgAnsw = new Sprite[25];
 	public static Sprite[] LevelsImgAnsw;
 
+	public GameObject _TheQuestionMark;
+	public static GameObject TheQuestionMark;
+
 	public static bool WHILE_TRUE_ANSWER = true;
 
 	public static bool GAME_STARTED = true;
+
+	public static bool Button_Next_Active = true;
+	public static bool Button_Back_Active = true;
 
 
 	public static int Money {
@@ -114,6 +120,7 @@ public class U : MonoBehaviour {
 		LevelsImg = _LevelsImg;
 		LevelsImgAnsw = _LevelsImgAnsw;
 
+		TheQuestionMark = _TheQuestionMark;
 
 		PlayerPrefs.SetInt("Money", 200);
 		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
@@ -121,7 +128,4 @@ public class U : MonoBehaviour {
 		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
 	}
 
-	void Start (){
-		AnswerImg.GetComponent<SpriteRenderer>().sprite = LevelsImgAnsw[current_level-1];
-	}
 }
