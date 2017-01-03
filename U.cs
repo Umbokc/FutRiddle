@@ -15,7 +15,7 @@ public class U : MonoBehaviour {
 	public GameObject[] _lands = new GameObject[3];
 	public static GameObject[] lands;
 	// The current coutry
-	public static int current = 0;
+	public static int current_land = 0;
 
 	// Level and other objetc
 	public GameObject _LevelAllObj;
@@ -36,33 +36,26 @@ public class U : MonoBehaviour {
 	public GameObject _RiddleSprite;
 	public static GameObject RiddleSprite;
 
-	// the swipe area
+	// the swipe for select countries
 	public GameObject _UISwipe;
 	public static GameObject UISwipe;
+
+	// the swipe for select levels
+	public GameObject _UISwipeLevel;
+	public static GameObject UISwipeLevel;
+
+	// all levels img
+	public Sprite[] _LevelsImg = new Sprite[25];
+	public static Sprite[] LevelsImg;
+
+	// all levels img answer
+	public Sprite[] _LevelsImgAnsw = new Sprite[25];
+	public static Sprite[] LevelsImgAnsw;
 
 	public static bool WHILE_TRUE_ANSWER = true;
 
 	public static bool GAME_STARTED = true;
 
-
-	void Awake () {
-		Land_main = _Land_main;
-		Settings = _Settings;
-		lands = _lands;
-
-		LevelAllObj = _LevelAllObj;
-		TheLevel = _TheLevel;
-		Answer = _Answer;
-		AnswerImg = _AnswerImg;
-		RiddleSprite = _RiddleSprite;
-
-		UISwipe = _UISwipe;
-
-		PlayerPrefs.SetInt("Money", 200);
-		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
-		PlayerPrefs.SetInt("Level", 1);
-		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
-	}
 
 	public static int Money {
 		set { Money_set.SetMoney(value); }
@@ -73,33 +66,14 @@ public class U : MonoBehaviour {
 		// set { Money_set.SetMoney(value); }
 		get { return PlayerPrefs.GetInt("Level"); } 
 	}
+	public static int current_level = 1;
 
 	public static string[] _LEVELS_ANSWER = new string[] {
-											"pogba",
-											"coutinho",
-											"payet",
-											"mahrez",
-											"shaqiri",
-											"silva",
-											"hazard",
-											"benteke",
-											"son",
-											"mane",
-											"wilshere",
-											"fonte",
-											"williams",
-											"negredo",
-											"terry",
-											"foster",
-											"aguero",
-											"morgan",
-											"ozil",
-											"rojo",
-											"deeney",
-											"kone",
-											"luiz",
-											"allen",
-											"eriksen"
+		"pogba", 	"coutinho", "payet", 	"mahrez", 	"shaqiri",
+		"silva", 	"hazard", 	"benteke", 	"son", 		"mane",
+		"wilshere", "fonte", 	"williams", "negredo", 	"terry",
+		"foster", 	"aguero", 	"morgan", 	"ozil", 	"rojo",
+		"deeney", 	"kone", 	"luiz", 	"allen", 	"eriksen"
 	};
 
 	// public static string[] _LEVELS_CHARS = new string[] {
@@ -122,4 +96,32 @@ public class U : MonoBehaviour {
 
 	public static GameObject[] _ENTER_CHARS = new GameObject[8];
 
+	void Awake () {
+		// crete static variable
+		Land_main = _Land_main;
+		Settings = _Settings;
+		lands = _lands;
+
+		LevelAllObj = _LevelAllObj;
+		TheLevel = _TheLevel;
+		Answer = _Answer;
+		AnswerImg = _AnswerImg;
+		RiddleSprite = _RiddleSprite;
+
+		UISwipe = _UISwipe;
+		UISwipeLevel = _UISwipeLevel;
+
+		LevelsImg = _LevelsImg;
+		LevelsImgAnsw = _LevelsImgAnsw;
+
+
+		PlayerPrefs.SetInt("Money", 200);
+		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
+		PlayerPrefs.SetInt("Level", 1);
+		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
+	}
+
+	void Start (){
+		AnswerImg.GetComponent<SpriteRenderer>().sprite = LevelsImgAnsw[current_level-1];
+	}
 }

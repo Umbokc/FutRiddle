@@ -13,9 +13,9 @@ public class UISwipeHandler : MonoBehaviour, IBeginDragHandler, IPointerDownHand
 
 		if(Mathf.Abs(delta.x) > Mathf.Abs(delta.y)){
 			if(delta.x > 0){ // to right 
-				if (U.current > 0) MoveLandToSide("right");
+				if (U.current_land > 0) MoveLandToSide("right");
 			} else { // to left
-				if (U.current < U.lands.Length-1) MoveLandToSide("left");
+				if (U.current_land < U.lands.Length-1) MoveLandToSide("left");
 			}
 		} else {
 			if(delta.y > 0){ // to up
@@ -60,16 +60,16 @@ public class UISwipeHandler : MonoBehaviour, IBeginDragHandler, IPointerDownHand
 
 
 		MoveLand(x_land);
-		U.current += indecr;
+		U.current_land += indecr;
 		MoveLand(x_land);
 		
-		name.text = (U.current == 2) ? "Spain" : (U.current == 1) ? "Germany" : "England" ;
+		name.text = (U.current_land == 2) ? "Spain" : (U.current_land == 1) ? "Germany" : "England" ;
 
 	}
 
 	private void MoveLand(float how){
-		Vector3 target = U.lands[U.current].transform.position;
+		Vector3 target = U.lands[U.current_land].transform.position;
 		target.x += how;
-		U.lands[U.current].transform.position = target;
+		U.lands[U.current_land].transform.position = target;
 	}
 }
