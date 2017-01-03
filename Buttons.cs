@@ -10,11 +10,13 @@ public class Buttons : MonoBehaviour {
 	private Animation animSetting;
 	private Animation animLand;
 	private Animation animLevel;
+	private Animation animLevelAnswer;
 
 	void Start(){
 		animSetting = U.Settings.GetComponent<Animation>();
 		animLand = U.Land_main.GetComponent<Animation>();
 		animLevel = U.TheLevel.GetComponent<Animation>();
+		animLevelAnswer = U.Answer.GetComponent<Animation>();
 	}
 
 	void Update(){
@@ -39,7 +41,7 @@ public class Buttons : MonoBehaviour {
 		switch (theButton){
 			case TheButton.SelecLevel: 
 				U.UISwipe.SetActive (false);
-				U.UISwipeLevel.SetActive (true);
+				// U.UISwipeLevel.SetActive (true);
 
 				U.Land_main.SetActive (false);
 				U.LevelAllObj.SetActive (true);
@@ -62,6 +64,8 @@ public class Buttons : MonoBehaviour {
 
 					if (U.TheLevel.active)
 						ToSettingAndBack(animLevel);
+					else if (U.Answer.active)
+						ToSettingAndBack(animLevelAnswer);
 					else
 						ToSettingAndBack(animLand);
 				}
@@ -73,6 +77,28 @@ public class Buttons : MonoBehaviour {
 			case TheButton.sound: break;
 			case TheButton.about: break;
 			case TheButton.contacts: break;
+			case TheButton.next:
+				if(U.Button_Next_Active){
+					U.MoveLevel_next = true;
+				}
+				break;
+			case TheButton.back:
+				if(U.Button_Back_Active){
+					U.MoveLevel_back = true;
+				}
+				break;
+			case TheButton.startGame:
+				// U.UISwipeLevel.SetActive (false);
+				U.Answer.SetActive (false);
+				U.TheQuestionMark.SetActive (false);
+
+				U.TheLevel.SetActive (true);
+
+				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = U.LevelsImg[U.current_level-1];
+				
+				U.GAME_STARTED = 1;
+
+				break;
 		}
 	}
 
@@ -93,5 +119,6 @@ public enum TheButton {
 	about,
 	contacts,
 	next,
-	back
+	back,
+	startGame
 }

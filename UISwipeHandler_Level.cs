@@ -7,22 +7,21 @@ public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDo
 	public TextMesh Level;
 	public GameObject[] Next_Back = new GameObject[2];
 
-
 	void Start (){
 		Check_Start();
 	}
 
 	public void OnBeginDrag(PointerEventData eventData){
 
-		Vector2 delta = eventData.delta;
+		// Vector2 delta = eventData.delta;
 
-		if(Mathf.Abs(delta.x) > Mathf.Abs(delta.y)){
-			if(delta.x > 0){ // to right 
-				if (U.current_level > 1) MoveLevelToSide("right");
-			} else { // to left
-				if (U.current_level < U.LevelsImg.Length) MoveLevelToSide("left");
-			}
-		}
+		// if(Mathf.Abs(delta.x) > Mathf.Abs(delta.y)){
+		// 	if(delta.x > 0){ // to right 
+		// 		if (U.current_level > 1) MoveLevelToSide("right");
+		// 	} else { // to left
+		// 		if (U.current_level < U.LevelsImg.Length) MoveLevelToSide("left");
+		// 	}
+		// }
 	}
 
 	public void OnDrag(PointerEventData eventData){
@@ -30,7 +29,18 @@ public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDo
 	}
 
 	public void OnPointerDown(PointerEventData eventData){
-		
+	
+	}
+
+	private void Update () {
+		if(U.MoveLevel_back){
+			U.MoveLevel_back = false;
+			MoveLevelToSide("right");
+		}
+		if(U.MoveLevel_next){
+			U.MoveLevel_next = false;
+			MoveLevelToSide("left");
+		}
 	}
 
 	private void MoveLevelToSide(string to_where){

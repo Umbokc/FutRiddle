@@ -5,20 +5,27 @@ public class AllChars : MonoBehaviour {
 
 	public Transform all_chars;
 
-	void Start () {
-		int i = 0;
-		foreach(Transform child in all_chars){
-			
-			int TheLevel = PlayerPrefs.GetInt("Level");
+	private int TheLevel = 1;
 
-			TextMesh TheChar = child.gameObject.GetComponentInChildren<TextMesh>();
-			TheChar.text = U._LEVELS_CHARS[TheLevel-1][i].ToString().ToUpper();
-			
-			i++;
-		}
+	void Start () {
+		// int TheLevel = PlayerPrefs.GetInt("Level");
+		// SetChars();
 	}
 	
-	void Update () {
-	
+	void Update (){
+		if(U.GAME_STARTED == 1){
+			U.GAME_STARTED = 2;
+			TheLevel = U.current_level;
+			SetChars();
+		}
+	}
+
+	void SetChars () {
+		int i = 0;
+		foreach(Transform child in all_chars){
+			TextMesh TheChar = child.gameObject.GetComponentInChildren<TextMesh>();
+			TheChar.text = U._LEVELS_CHARS[TheLevel-1][i].ToString().ToUpper();
+			i++;
+		}
 	}
 }

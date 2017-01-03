@@ -12,10 +12,22 @@ public class EnterChars : MonoBehaviour {
 	private float[] _ENTER_CHARS_COORDINATE_X_7 = new float[] { -2.04f, -1.36f, -0.68f, 0f, 0.68f, 1.36f, 2.04f };
 	private float[] _ENTER_CHARS_COORDINATE_X_8 = new float[] { -2.4f, -1.72f, -1.04f, -0.36f, 0.32f, 1f, 1.68f, 2.38f };
 
+	private int TheLevel = 1;
 
 	void Start () {
 
-		int len_word = U._LEVELS_ANSWER[U.Level-1].Length;
+	}
+	
+	void Update () {
+		if(U.GAME_STARTED == 2){
+			U.GAME_STARTED = 3;
+			TheLevel = U.current_level;
+			SetEnterChars();
+		}
+	}
+
+	void SetEnterChars (){
+		int len_word = U._LEVELS_ANSWER[TheLevel-1].Length;
 
 		float[] _ENTER_CHARS_COORDINATE =   (len_word == 3) ? _ENTER_CHARS_COORDINATE_X_3 :
 											(len_word == 4) ? _ENTER_CHARS_COORDINATE_X_4 :  
@@ -37,9 +49,5 @@ public class EnterChars : MonoBehaviour {
 			
 			i++;
 		}
-	}
-	
-	void Update () {
-			
 	}
 }

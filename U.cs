@@ -57,10 +57,17 @@ public class U : MonoBehaviour {
 
 	public static bool WHILE_TRUE_ANSWER = true;
 
-	public static bool GAME_STARTED = true;
+	// 0 - game don't start
+	// 1 - game start
+	// 2 - set chars of level (done)
+	// 3 - set enter chars (done)
+	public static int GAME_STARTED = 0;
 
 	public static bool Button_Next_Active = true;
 	public static bool Button_Back_Active = true;
+
+	public static bool MoveLevel_back = false;
+	public static bool MoveLevel_next = false;
 
 
 	public static int Money {
@@ -126,6 +133,10 @@ public class U : MonoBehaviour {
 		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
 		PlayerPrefs.SetInt("Level", 1);
 		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
+		PlayerPrefs.SetString("Levels", "");
+
+
+
 	}
 
 }
