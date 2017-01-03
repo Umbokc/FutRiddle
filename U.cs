@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class U : MonoBehaviour {
 
@@ -57,11 +58,12 @@ public class U : MonoBehaviour {
 
 	public static bool WHILE_TRUE_ANSWER = true;
 
-	// 0 - game don't start
-	// 1 - game start
-	// 2 - set chars of level (done)
-	// 3 - set enter chars (done)
-	public static int GAME_STARTED = 0;
+	// -1 - game don't start
+	// 	0 - selec level
+	//  1 - game start
+	//  2 - set chars of level (done)
+	//  3 - set enter chars (done)
+	public static int GAME_STARTED = -1;
 
 	public static bool Button_Next_Active = true;
 	public static bool Button_Back_Active = true;
@@ -69,6 +71,7 @@ public class U : MonoBehaviour {
 	public static bool MoveLevel_back = false;
 	public static bool MoveLevel_next = false;
 
+	public static int[] opened_levels = new int[25];
 
 	public static int Money {
 		set { Money_set.SetMoney(value); }
@@ -133,9 +136,22 @@ public class U : MonoBehaviour {
 		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
 		PlayerPrefs.SetInt("Level", 1);
 		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
-		PlayerPrefs.SetString("Levels", "");
+		// PlayerPrefs.SetString("Levels", "");
 
+		string opened_lvls = PlayerPrefs.GetString("Levels");
+		if (opened_lvls.Length > 1){
 
+			Debug.Log(opened_lvls);
+			string[] substrings = opened_lvls.Split(',');
+			int i = 0;
+			foreach (var substring in substrings) {
+				int.TryParse (substring, out opened_levels[i]);
+				i++;
+			}
+		} else if (opened_lvls.Length == 1) {
+			Debug.Log(opened_lvls);
+			int.TryParse (opened_lvls, out opened_levels[0]);
+		}
 
 	}
 

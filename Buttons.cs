@@ -49,6 +49,9 @@ public class Buttons : MonoBehaviour {
 
 				U.Answer.SetActive (true);
 				U.TheQuestionMark.SetActive (true);
+				
+				U.GAME_STARTED = 0;
+
 				break;
 			case TheButton.ToSetting:
 				if (!animSetting["ToDown"].enabled){
@@ -95,7 +98,7 @@ public class Buttons : MonoBehaviour {
 				U.TheLevel.SetActive (true);
 
 				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = U.LevelsImg[U.current_level-1];
-				
+
 				U.GAME_STARTED = 1;
 
 				break;

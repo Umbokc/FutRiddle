@@ -8,7 +8,7 @@ public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDo
 	public GameObject[] Next_Back = new GameObject[2];
 
 	void Start (){
-		Check_Start();
+
 	}
 
 	public void OnBeginDrag(PointerEventData eventData){
@@ -40,6 +40,10 @@ public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDo
 		if(U.MoveLevel_next){
 			U.MoveLevel_next = false;
 			MoveLevelToSide("left");
+		}
+		if (U.GAME_STARTED == 0){
+			U.GAME_STARTED = -1;
+			Check_Start();
 		}
 	}
 
@@ -76,7 +80,20 @@ public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDo
 	}
 
 	private void Check_Start(){
+
 		U.AnswerImg.GetComponent<SpriteRenderer>().sprite = U.LevelsImgAnsw[U.current_level-1];
+		
+		U.AnswerImg.GetComponent<SpriteRenderer>().color = new Vector4(0f,0f,0f,1f);
+		U.TheQuestionMark.SetActive (true);
+
+		foreach(int i in U.opened_levels){
+			if (U.current_level == i){
+				U.AnswerImg.GetComponent<SpriteRenderer>().color = new Vector4(1f,1f,1f,1f);
+				U.TheQuestionMark.SetActive (false);
+				break;
+			}
+		}
+
 		if (U.current_level == 1) {
 			Next_Back[1].GetComponent<SpriteRenderer>().color = new Vector4(0.5f,0.5f,0.5f,1f);
 			U.Button_Back_Active = false;
