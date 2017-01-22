@@ -14,13 +14,12 @@ public class Buttons : MonoBehaviour {
 
 	void Start(){
 		animSetting = U.Settings.GetComponent<Animation>();
-		animLand = U.Land_main.GetComponent<Animation>();
+		animLand = U.Main_scene.GetComponent<Animation>();
 		animLevel = U.TheLevel.GetComponent<Animation>();
 		animLevelAnswer = U.Answer.GetComponent<Animation>();
 	}
 
 	void Update(){
-
 	}
 
 	void OnMouseDown(){
@@ -39,17 +38,23 @@ public class Buttons : MonoBehaviour {
 
 	void OnMouseUpAsButton (){
 		switch (theButton){
+			// нажатие на SelecLevel
 			case TheButton.SelecLevel: 
+				// обработка свайпов для изменения страны 
 				U.UISwipe.SetActive (false);
 
-				U.Land_main.SetActive (false);
+				// главное меню
+				U.Main_scene.SetActive (false);
+				// начало игры
 				U.LevelAllObj.SetActive (true);
-				U.TheLevel.SetActive (false);
-
-				U.Answer.SetActive (true);
-				U.TheQuestionMark.SetActive (true);
+				// загадка
+				U.TheLevel.SetActive (true);
+				// ответ (видны только пройденные)
+				U.Answer.SetActive (false);
+				// вопросительный знак в ответах (тех которые еще не пройденные)
+				U.TheQuestionMark.SetActive (false);
 				
-				U.GAME_STARTED = 0;
+				U.GAME_STARTED = 1;
 
 				break;
 			case TheButton.ToSetting:

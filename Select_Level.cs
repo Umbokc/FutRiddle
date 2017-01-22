@@ -8,7 +8,6 @@ public class Select_Level : MonoBehaviour{
 	public GameObject[] Next_Back = new GameObject[2];
 
 	void Start (){
-
 	}
 
 	private void Update () {
@@ -36,12 +35,12 @@ public class Select_Level : MonoBehaviour{
 			case 3: MoveAnswerImg(-0.23f); 	break; 		case 4: MoveAnswerImg(-0.32f);	break; 
 			case 5: MoveAnswerImg(0.29f); 	break; 		case 6: MoveAnswerImg(-0.31f); 	break;
 			case 7: MoveAnswerImg(0); 		break; 		case 8: MoveAnswerImg(0); 		break; 
-			case 9: MoveAnswerImg(0.18f); 	break; 		case 10: MoveAnswerImg(-0.25f); 	break; 
+			case 9: MoveAnswerImg(0.18f); 	break; 		case 10: MoveAnswerImg(-0.25f); break; 
 			case 11: MoveAnswerImg(-0.43f); break; 		case 12: MoveAnswerImg(0.16f); 	break; 
-			case 13: MoveAnswerImg(-0.34f); break; 		case 14: MoveAnswerImg(-0.34f); 	break; 
+			case 13: MoveAnswerImg(-0.34f); break; 		case 14: MoveAnswerImg(-0.34f); break; 
 			case 15: MoveAnswerImg(-0.34f); break; 		case 16: MoveAnswerImg(0.45f); 	break; 
-			case 17: MoveAnswerImg(0.09f); 	break; 		case 18: MoveAnswerImg(-0.45f); 	break; 
-			case 19: MoveAnswerImg(0.03f); 	break; 		case 20: MoveAnswerImg(-0.45f); 	break; 
+			case 17: MoveAnswerImg(0.09f); 	break; 		case 18: MoveAnswerImg(-0.45f); break; 
+			case 19: MoveAnswerImg(0.03f); 	break; 		case 20: MoveAnswerImg(-0.45f); break; 
 			case 21: MoveAnswerImg(0); 		break; 		case 22: MoveAnswerImg(0); 		break; 
 			case 23: MoveAnswerImg(0.4f); 	break; 		case 24: MoveAnswerImg(0.23f); 	break; 
 			case 25: MoveAnswerImg(0.23f); 	break; 

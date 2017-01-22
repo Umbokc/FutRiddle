@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class U : MonoBehaviour {
 
-	public GameObject _Land_main;
-	public static GameObject Land_main;
+	public GameObject _Main_scene;
+	public static GameObject Main_scene;
 	
 	// the settings elements
 	public GameObject _Settings;
@@ -13,10 +14,8 @@ public class U : MonoBehaviour {
 	// if settings is active then 'true'
 	public static bool Settings_active = false;
 
-	public GameObject[] _lands = new GameObject[3];
-	public static GameObject[] lands;
 	// The current coutry
-	public static int current_land = 0;
+	public static int current_country = 1;
 
 	// Level and other objetc
 	public GameObject _LevelAllObj;
@@ -48,9 +47,7 @@ public class U : MonoBehaviour {
 
 	// -1 - game don't start
 	// 	0 - selec level
-	//  1 - game start
-	//  2 - set chars of level (done)
-	//  3 - set enter chars (done)
+	//  1 - строим поля для ввода ответа, строим нужные для уровня буквы и прописываем вних символы (BuildFieldAndChar)
 	public static int GAME_STARTED = -1;
 
 	public static bool Button_Next_Active = true;
@@ -67,10 +64,10 @@ public class U : MonoBehaviour {
 	}
 
 	public static int Level {
-		// set { Money_set.SetMoney(value); }
+		set { PlayerPrefs.SetInt("Level", value); }
 		get { return PlayerPrefs.GetInt("Level"); } 
 	}
-	public static int current_level = 1;
+	public static int current_level;
 
 	public static string[] _LEVELS_ANSWER = new string[] {
 		"pogba", 	"coutinho", "mahrez", 	"payet", 	"shaqiri",
@@ -88,15 +85,16 @@ public class U : MonoBehaviour {
 		"hpesydainafeeg", "ilnoeknfgjtmcz", "jnltkzonuifzgc", "eohaskdnpriiey", "ophastdnirella"
 	};
 
+	// какая по счету была нажата буква
 	public static int What_button_Enter = 0;
 
-	public static GameObject[] _ENTER_CHARS = new GameObject[8];
+	public static GameObject[] _ENTER_CHARS = new GameObject[14];
+	public static GameObject[] _FIELD_ANSWER_CHARS = new GameObject[8];
 
 	void Awake () {
 		// crete static variable
-		Land_main = _Land_main;
+		Main_scene = _Main_scene;
 		Settings = _Settings;
-		lands = _lands;
 
 		LevelAllObj = _LevelAllObj;
 		TheLevel = _TheLevel;
@@ -111,6 +109,7 @@ public class U : MonoBehaviour {
 		PlayerPrefs.SetInt("Money", 200);
 		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
 		PlayerPrefs.SetInt("Level", 1);
+		current_level = PlayerPrefs.GetInt("Level");
 		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
 		PlayerPrefs.SetString("Levels", "");
 
@@ -129,6 +128,9 @@ public class U : MonoBehaviour {
 			Debug.Log(opened_lvls);
 			int.TryParse (opened_lvls, out opened_levels[0]);
 		}
-
 	}
+
+	public static void LoadScene(string w){
+		SceneManager.LoadScene (w);
+	} 
 }

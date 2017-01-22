@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+
 
 public class Logo : MonoBehaviour {
 
@@ -10,6 +10,6 @@ public class Logo : MonoBehaviour {
 	}
 
 	void LoadScene(){
-		 SceneManager.LoadScene ("_main");
+		 U.LoadScene ("_main");
 	}
 }
