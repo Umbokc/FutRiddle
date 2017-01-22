@@ -45,8 +45,8 @@ public class U : MonoBehaviour {
 
 	public static bool WHILE_TRUE_ANSWER = true;
 
-	// -1 - game don't start
-	// 	0 - selec level
+	// -1 - идет игра
+	// 	0 - начальный режим
 	//  1 - строим поля для ввода ответа, строим нужные для уровня буквы и прописываем вних символы (BuildFieldAndChar)
 	public static int GAME_STARTED = -1;
 
@@ -111,13 +111,12 @@ public class U : MonoBehaviour {
 		PlayerPrefs.SetInt("Level", 1);
 		current_level = PlayerPrefs.GetInt("Level");
 		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
-		PlayerPrefs.SetString("Levels", "");
-
+		PlayerPrefs.SetString("Levels",PlayerPrefs.GetString("Levels") == null ? "" : PlayerPrefs.GetString("Levels"));
+		// PlayerPrefs.SetString("Levels","");
 		
 		string opened_lvls = PlayerPrefs.GetString("Levels");
 		if (opened_lvls.Length > 1){
 
-			Debug.Log(opened_lvls);
 			string[] substrings = opened_lvls.Split(',');
 			int i = 0;
 			foreach (var substring in substrings) {
@@ -125,12 +124,13 @@ public class U : MonoBehaviour {
 				i++;
 			}
 		} else if (opened_lvls.Length == 1) {
-			Debug.Log(opened_lvls);
 			int.TryParse (opened_lvls, out opened_levels[0]);
 		}
+
 	}
 
-	public static void LoadScene(string w){
+	public static void LoadScene (string w){
 		SceneManager.LoadScene (w);
-	} 
+	}
+
 }

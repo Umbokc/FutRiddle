@@ -81,6 +81,8 @@ public class BuildFieldAndChar : MonoBehaviour {
 				Vector3 crd = new Vector3(x,_ENTER_CHARS_COORD_Y[j],-0.01f);
 				// создание обьекта
 				GameObject go = Instantiate(entr,crd,Quaternion.identity) as GameObject;
+				// присвоение обьекту родителя
+				go.transform.SetParent (U.TheLevel.transform);
 				// получаем дочерний обьект буквы в виде текста 
 				TextMesh TheChar = go.GetComponentInChildren<TextMesh>();
 				// изменяем символ
