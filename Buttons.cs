@@ -23,14 +23,14 @@ public class Buttons : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active))
+		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active) || theButton == TheButton.startGame)
 			return;
 		else
 			transform.localScale += new Vector3(0.05f,0.05f,0);
 	}
 
 	void OnMouseUp(){
-		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active))
+		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active) || theButton == TheButton.startGame)
 			return;
 		else
 			transform.localScale -= new Vector3(0.05f,0.05f,0);
@@ -51,8 +51,6 @@ public class Buttons : MonoBehaviour {
 				U.TheLevel.SetActive (true);
 				// ответ (видны только пройденные)
 				U.Answer.SetActive (false);
-				// вопросительный знак в ответах (тех которые еще не пройденные)
-				U.TheQuestionMark.SetActive (false);
 				
 				U.GAME_STARTED = 1;
 
@@ -85,18 +83,13 @@ public class Buttons : MonoBehaviour {
 			case TheButton.about: break;
 			case TheButton.contacts: break;
 			case TheButton.next:
-				if(U.Button_Next_Active){
-					U.MoveLevel_next = true;
-				}
+				if(U.Button_Next_Active) U.MoveLevel_next = true;
 				break;
 			case TheButton.back:
-				if(U.Button_Back_Active){
-					U.MoveLevel_back = true;
-				}
+				if(U.Button_Back_Active) U.MoveLevel_back = true;
 				break;
 			case TheButton.startGame:
 				U.Answer.SetActive (false);
-				U.TheQuestionMark.SetActive (false);
 
 				U.TheLevel.SetActive (true);
 
@@ -105,6 +98,26 @@ public class Buttons : MonoBehaviour {
 				U.GAME_STARTED = 1;
 
 				break;
+			case TheButton.charAdd:
+				if(U.Money >= 100){
+					string chr = U._LEVELS_ANSWER[U.current_level-1][U.What_button_Enter].ToString().ToUpper();
+
+					U._FIELD_ANSWER_CHARS[U.What_button_Enter].gameObject.GetComponentInChildren<TextMesh>().text = chr;
+					CharsClickValid.Check_char();
+
+
+					for(int i = 0; i < U._LEVELS_CHARS[U.current_level-1].Length; i++ ){
+						if(U._LEVELS_CHARS[U.current_level-1][i].ToString().ToUpper() == chr){
+							Destroy(U._ENTER_CHARS[i]);
+							break;
+						}
+					}
+
+					U.What_button_Enter++;
+					U.Money -= 100;
+				}
+				break;
+			case TheButton.charSub: break;
 		}
 	}
 
@@ -126,5 +139,7 @@ public enum TheButton {
 	contacts,
 	next,
 	back,
-	startGame
+	startGame,
+	charAdd,
+	charSub
 }

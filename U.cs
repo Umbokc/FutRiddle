@@ -40,9 +40,6 @@ public class U : MonoBehaviour {
 	public GameObject _UISwipe;
 	public static GameObject UISwipe;
 
-	public GameObject _TheQuestionMark;
-	public static GameObject TheQuestionMark;
-
 	public static bool WHILE_TRUE_ANSWER = true;
 
 	// -1 - идет игра
@@ -104,8 +101,6 @@ public class U : MonoBehaviour {
 
 		UISwipe = _UISwipe;
 
-		TheQuestionMark = _TheQuestionMark;
-
 		PlayerPrefs.SetInt("Money", 200);
 		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
 		PlayerPrefs.SetInt("Level", 1);
@@ -126,7 +121,6 @@ public class U : MonoBehaviour {
 		} else if (opened_lvls.Length == 1) {
 			int.TryParse (opened_lvls, out opened_levels[0]);
 		}
-
 	}
 
 	public static void LoadScene (string w){
