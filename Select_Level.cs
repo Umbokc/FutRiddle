@@ -32,19 +32,19 @@ public class Select_Level : MonoBehaviour{
 		U.current_level += num;
 
 		switch(U.current_level){
-			case 1: MoveAnwerImg(0); 		break; 		case 2: MoveAnwerImg(0); 		break; 
-			case 3: MoveAnwerImg(-0.23f); 	break; 		case 4: MoveAnwerImg(-0.32f);	break; 
-			case 5: MoveAnwerImg(0.29f); 	break; 		case 6: MoveAnwerImg(-0.31f); 	break;
-			case 7: MoveAnwerImg(0); 		break; 		case 8: MoveAnwerImg(0); 		break; 
-			case 9: MoveAnwerImg(0.18f); 	break; 		case 10: MoveAnwerImg(-0.25f); 	break; 
-			case 11: MoveAnwerImg(-0.43f); 	break; 		case 12: MoveAnwerImg(0.16f); 	break; 
-			case 13: MoveAnwerImg(-0.34f); 	break; 		case 14: MoveAnwerImg(-0.34f); 	break; 
-			case 15: MoveAnwerImg(-0.34f); 	break; 		case 16: MoveAnwerImg(0.45f); 	break; 
-			case 17: MoveAnwerImg(0.09f); 	break; 		case 18: MoveAnwerImg(-0.45f); 	break; 
-			case 19: MoveAnwerImg(0.03f); 	break; 		case 20: MoveAnwerImg(-0.45f); 	break; 
-			case 21: MoveAnwerImg(0); 		break; 		case 22: MoveAnwerImg(0); 		break; 
-			case 23: MoveAnwerImg(0.4f); 	break; 		case 24: MoveAnwerImg(0.23f); 	break; 
-			case 25: MoveAnwerImg(0.23f); 	break; 
+			case 1: MoveAnswerImg(0); 		break; 		case 2: MoveAnswerImg(0); 		break; 
+			case 3: MoveAnswerImg(-0.23f); 	break; 		case 4: MoveAnswerImg(-0.32f);	break; 
+			case 5: MoveAnswerImg(0.29f); 	break; 		case 6: MoveAnswerImg(-0.31f); 	break;
+			case 7: MoveAnswerImg(0); 		break; 		case 8: MoveAnswerImg(0); 		break; 
+			case 9: MoveAnswerImg(0.18f); 	break; 		case 10: MoveAnswerImg(-0.25f); 	break; 
+			case 11: MoveAnswerImg(-0.43f); break; 		case 12: MoveAnswerImg(0.16f); 	break; 
+			case 13: MoveAnswerImg(-0.34f); break; 		case 14: MoveAnswerImg(-0.34f); 	break; 
+			case 15: MoveAnswerImg(-0.34f); break; 		case 16: MoveAnswerImg(0.45f); 	break; 
+			case 17: MoveAnswerImg(0.09f); 	break; 		case 18: MoveAnswerImg(-0.45f); 	break; 
+			case 19: MoveAnswerImg(0.03f); 	break; 		case 20: MoveAnswerImg(-0.45f); 	break; 
+			case 21: MoveAnswerImg(0); 		break; 		case 22: MoveAnswerImg(0); 		break; 
+			case 23: MoveAnswerImg(0.4f); 	break; 		case 24: MoveAnswerImg(0.23f); 	break; 
+			case 25: MoveAnswerImg(0.23f); 	break; 
 		}
 		
 		Check_Start();
@@ -52,7 +52,7 @@ public class Select_Level : MonoBehaviour{
 		Level.text = "LEVEL " + U.current_level.ToString();
 	}
 
-	private void MoveAnwerImg(float how_x){
+	private void MoveAnswerImg(float how_x){
 		Vector3 target = U.AnswerImg.transform.position;
 		target.x = how_x;
 		U.AnswerImg.transform.position = target;
@@ -60,7 +60,7 @@ public class Select_Level : MonoBehaviour{
 
 	private void Check_Start(){
 
-		U.AnswerImg.GetComponent<SpriteRenderer>().sprite = U.LevelsImgAnsw[U.current_level-1];
+		U.AnswerImg.GetComponent<SpriteRenderer>().sprite =  Resources.Load<Sprite>("levels/answer/" + U.current_level);
 		
 		U.AnswerImg.GetComponent<SpriteRenderer>().color = new Vector4(0f,0f,0f,1f);
 		U.TheQuestionMark.SetActive (true);
@@ -76,7 +76,7 @@ public class Select_Level : MonoBehaviour{
 		if (U.current_level == 1) {
 			Next_Back[1].GetComponent<SpriteRenderer>().color = new Vector4(0.5f,0.5f,0.5f,1f);
 			U.Button_Back_Active = false;
-		} else if (U.current_level == U.LevelsImg.Length) {
+		} else if (U.current_level == U._LEVELS_CHARS.Length) {
 			Next_Back[0].GetComponent<SpriteRenderer>().color = new Vector4(0.5f,0.5f,0.5f,1f);
 			U.Button_Next_Active = false;
 		} else {

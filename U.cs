@@ -41,18 +41,6 @@ public class U : MonoBehaviour {
 	public GameObject _UISwipe;
 	public static GameObject UISwipe;
 
-	// the swipe for select levels
-	public GameObject _UISwipeLevel;
-	public static GameObject UISwipeLevel;
-
-	// all levels img
-	public Sprite[] _LevelsImg = new Sprite[25];
-	public static Sprite[] LevelsImg;
-
-	// all levels img answer
-	public Sprite[] _LevelsImgAnsw = new Sprite[25];
-	public static Sprite[] LevelsImgAnsw;
-
 	public GameObject _TheQuestionMark;
 	public static GameObject TheQuestionMark;
 
@@ -92,14 +80,6 @@ public class U : MonoBehaviour {
 		"deeney", 	"kone", 	"luiz", 	"allen", 	"eriksen"
 	};
 
-	// public static string[] _LEVELS_CHARS = new string[] {
-	// 	"JKVFPIXBGOAYCM", "JKFTHIOBGONUCM", "JAFRHIOZGENUCM", "JAFRHPOTGENYCM", "IAFRHPSTQENYIM",
-	// 	"IFARSPHTLENVIM", "IFARSPHZAENDID", "BAFNHKETQENYEM", "IHFVPINSGOAYCM", "JKFTHINAGONECM",
-	// 	"RKFTHIESGEWLCM", "JKFVPTXNGOEYCM", "AKITHIESGLWLCM", "IADRHPEGQENYIO", "JKFRPTXNGOEYCR",
-	// 	"IFARSPHOAENTID", "UFARSPHOAENGIO", "UFARSAHOPMNGIO", "JKFTHINLGONZCM", "JKFTHINLGOORCM",
-	// 	"YFAESAHEPDNGIE", "JKFTEINLGONZCM", "JKFTUINLGONZCZ", "IADRHPESKENYIO", "ILARSPHOAENTLD"
-	// };
-
 	public static string[] _LEVELS_CHARS = new string[] {
 		"xfompajigckvby", "bjitohcnfmgkuo", "ornzmigfuacehj", "cgranephmyojtf", "nfhmyipasiqter",
 		"vlnertspamfihi", "narfapdziisehd", "nmfhneqakeytbe", "imfgapnhicyosv", "kngfohmijtcnae",
@@ -125,10 +105,6 @@ public class U : MonoBehaviour {
 		RiddleSprite = _RiddleSprite;
 
 		UISwipe = _UISwipe;
-		UISwipeLevel = _UISwipeLevel;
-
-		LevelsImg = _LevelsImg;
-		LevelsImgAnsw = _LevelsImgAnsw;
 
 		TheQuestionMark = _TheQuestionMark;
 
@@ -136,8 +112,9 @@ public class U : MonoBehaviour {
 		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
 		PlayerPrefs.SetInt("Level", 1);
 		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
-		// PlayerPrefs.SetString("Levels", "");
+		PlayerPrefs.SetString("Levels", "");
 
+		
 		string opened_lvls = PlayerPrefs.GetString("Levels");
 		if (opened_lvls.Length > 1){
 
@@ -154,5 +131,4 @@ public class U : MonoBehaviour {
 		}
 
 	}
-
 }

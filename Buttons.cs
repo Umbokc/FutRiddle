@@ -41,7 +41,6 @@ public class Buttons : MonoBehaviour {
 		switch (theButton){
 			case TheButton.SelecLevel: 
 				U.UISwipe.SetActive (false);
-				// U.UISwipeLevel.SetActive (true);
 
 				U.Land_main.SetActive (false);
 				U.LevelAllObj.SetActive (true);
@@ -91,14 +90,13 @@ public class Buttons : MonoBehaviour {
 				}
 				break;
 			case TheButton.startGame:
-				// U.UISwipeLevel.SetActive (false);
 				U.Answer.SetActive (false);
 				U.TheQuestionMark.SetActive (false);
 
 				U.TheLevel.SetActive (true);
 
-				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = U.LevelsImg[U.current_level-1];
-
+				// U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = U.LevelsImg[U.current_level];
+				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/Uroven-" + U.current_level);
 				U.GAME_STARTED = 1;
 
 				break;
