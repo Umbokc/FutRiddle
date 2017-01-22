@@ -10,7 +10,7 @@ public class CharsClickValid : MonoBehaviour {
 			// если была введена последняя буква
 			if ((U.What_button_Enter+1) == U._LEVELS_ANSWER[U.current_level-1].Length){
 				// обнуляем номер введенной буквы
-				U.What_button_Enter = 0;
+				U.What_button_Enter = -1;
 				// удаляем обьекты предыдущего уровня, если они есть
 				foreach(GameObject go in U._ENTER_CHARS){
 					Destroy(go);

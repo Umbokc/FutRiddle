@@ -18,7 +18,7 @@ public class ClickChar : MonoBehaviour {
 			TextMesh chr = gameObject.GetComponentInChildren<TextMesh>();
 			// добаляем символ в поле для ответа
 			U._FIELD_ANSWER_CHARS[U.What_button_Enter].gameObject.GetComponentInChildren<TextMesh>().text = chr.text;
-			// вызываем проверку символов 
+			// вызываем проверку символов
 			CharsClickValid.Check_char();
 			// увеличаваем номер введенного символа 
 			U.What_button_Enter++;
