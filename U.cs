@@ -85,7 +85,7 @@ public class U : MonoBehaviour {
 	public static int current_level = 1;
 
 	public static string[] _LEVELS_ANSWER = new string[] {
-		"pogba", 	"coutinho", "payet", 	"mahrez", 	"shaqiri",
+		"pogba", 	"coutinho", "mahrez", 	"payet", 	"shaqiri",
 		"silva", 	"hazard", 	"benteke", 	"son", 		"mane",
 		"wilshere", "fonte", 	"williams", "negredo", 	"terry",
 		"foster", 	"aguero", 	"morgan", 	"ozil", 	"rojo",

@@ -2,34 +2,13 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class UISwipeHandler_Level : MonoBehaviour, IBeginDragHandler, IPointerDownHandler, IDragHandler{
+public class Select_Level : MonoBehaviour{
 
 	public TextMesh Level;
 	public GameObject[] Next_Back = new GameObject[2];
 
 	void Start (){
 
-	}
-
-	public void OnBeginDrag(PointerEventData eventData){
-
-		// Vector2 delta = eventData.delta;
-
-		// if(Mathf.Abs(delta.x) > Mathf.Abs(delta.y)){
-		// 	if(delta.x > 0){ // to right 
-		// 		if (U.current_level > 1) MoveLevelToSide("right");
-		// 	} else { // to left
-		// 		if (U.current_level < U.LevelsImg.Length) MoveLevelToSide("left");
-		// 	}
-		// }
-	}
-
-	public void OnDrag(PointerEventData eventData){
-
-	}
-
-	public void OnPointerDown(PointerEventData eventData){
-	
 	}
 
 	private void Update () {

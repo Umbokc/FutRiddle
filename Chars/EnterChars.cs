@@ -27,6 +27,11 @@ public class EnterChars : MonoBehaviour {
 	}
 
 	void SetEnterChars (){
+
+		foreach(GameObject go in U._ENTER_CHARS){
+			Destroy(go);
+		}
+
 		int len_word = U._LEVELS_ANSWER[TheLevel-1].Length;
 
 		float[] _ENTER_CHARS_COORDINATE =   (len_word == 3) ? _ENTER_CHARS_COORDINATE_X_3 :
