@@ -101,13 +101,17 @@ public class U : MonoBehaviour {
 
 		UISwipe = _UISwipe;
 
-		PlayerPrefs.SetInt("Money", 200);
-		// PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
-		PlayerPrefs.SetInt("Level", 1);
+		// PlayerPrefs.SetInt("Reset", 0);
+
+		if(PlayerPrefs.GetInt("Reset") == 0 || PlayerPrefs.GetInt("Reset") == null){
+			PlayerPrefs.SetInt("Reset", 1);
+			PlayerPrefs_reset();
+		}
+
+		PlayerPrefs_continue();
+
 		current_level = PlayerPrefs.GetInt("Level");
-		// PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
-		PlayerPrefs.SetString("Levels",PlayerPrefs.GetString("Levels") == null ? "" : PlayerPrefs.GetString("Levels"));
-		// PlayerPrefs.SetString("Levels","");
+		
 		
 		string opened_lvls = PlayerPrefs.GetString("Levels");
 		if (opened_lvls.Length > 1){
@@ -121,6 +125,18 @@ public class U : MonoBehaviour {
 		} else if (opened_lvls.Length == 1) {
 			int.TryParse (opened_lvls, out opened_levels[0]);
 		}
+	}
+
+	private void PlayerPrefs_reset(){
+		PlayerPrefs.SetInt("Money", 300);
+		PlayerPrefs.SetInt("Level", 1);
+		PlayerPrefs.SetString("Levels","");
+	}
+
+	private void PlayerPrefs_continue(){
+		PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
+		PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
+		PlayerPrefs.SetString("Levels",PlayerPrefs.GetString("Levels") == null ? "" : PlayerPrefs.GetString("Levels"));
 	}
 
 	public static void LoadScene (string w){
