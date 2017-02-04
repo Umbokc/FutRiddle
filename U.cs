@@ -3,6 +3,9 @@ using System.Collections;
 using System;
 using UnityEngine.SceneManagement;
 
+using System.Collections.Generic;
+using System.Linq;
+
 public class U : MonoBehaviour {
 
 	public GameObject _Main_scene;
@@ -55,15 +58,24 @@ public class U : MonoBehaviour {
 
 	public static int[] opened_levels = new int[25];
 
-	public static int Money {
-		set { Money_set.SetMoney(value); }
+	public static int PP_Money {
+		set { 
+			PlayerPrefs.SetInt("Money",value);
+			Money_set.set_money = true; 
+		}
 		get { return PlayerPrefs.GetInt("Money"); } 
 	}
 
-	public static int Level {
+	public static int PP_Level {
 		set { PlayerPrefs.SetInt("Level", value); }
 		get { return PlayerPrefs.GetInt("Level"); } 
 	}
+
+	public static string PP_Levels {
+		set { PlayerPrefs.SetString("Levels", value); }
+		get { return PlayerPrefs.GetString("Levels"); } 
+	}
+
 	public static int current_level;
 
 	public static string[] _LEVELS_ANSWER = new string[] {
@@ -101,46 +113,102 @@ public class U : MonoBehaviour {
 
 		UISwipe = _UISwipe;
 
-		// PlayerPrefs.SetInt("Reset", 0);
-
-		if(PlayerPrefs.GetInt("Reset") == 0 || PlayerPrefs.GetInt("Reset") == null){
-			PlayerPrefs.SetInt("Reset", 1);
+		int Reset = 0;
+ 
+		if(Reset == 1){
 			PlayerPrefs_reset();
+		} else {
+			PlayerPrefs_continue();
 		}
 
-		PlayerPrefs_continue();
-
-		current_level = PlayerPrefs.GetInt("Level");
+		current_level = PP_Level;
+		// Debug.Log(PP_Level);
 		
-		
-		string opened_lvls = PlayerPrefs.GetString("Levels");
-		if (opened_lvls.Length > 1){
+		Debug.Log(PP_Levels);
 
-			string[] substrings = opened_lvls.Split(',');
+		opened_levels = StringToArr(PP_Levels);
+
+	}
+
+	public static string ArrToStringUniq(int[] x){
+
+		int[] nx = UniqItem(x);
+		
+		string s = "";
+
+		for(int l = 0; l < nx.Length; l++){
+			if(nx[l] == 0) continue;
+
+			if(l == nx.Length-1)
+				s += nx[l].ToString();
+			else
+				s += (nx[l].ToString() + ",");
+		}
+
+		return s;
+	}
+
+	public static int[] StringToArr(string s, int add_new=0){
+
+		int size = (s.Length+1)/2;
+
+		size += 1;
+
+		int[] x = new int[size];
+
+		if (s.Length > 1){
+
+			string[] substrings = s.Split(',');
 			int i = 0;
 			foreach (var substring in substrings) {
-				int.TryParse (substring, out opened_levels[i]);
+				int.TryParse (substring, out x[i]);
 				i++;
 			}
-		} else if (opened_lvls.Length == 1) {
-			int.TryParse (opened_lvls, out opened_levels[0]);
+
+		} else if (s.Length == 1) {
+
+			int.TryParse (s, out x[0]);
+
+		} 
+		if(add_new != 0) {
+			x[x.Length-1] = add_new;
 		}
+
+		int[] nx = UniqItem(x);
+		
+		return nx;
 	}
 
 	private void PlayerPrefs_reset(){
-		PlayerPrefs.SetInt("Money", 300);
+		PlayerPrefs.SetInt("Money", 3000);
 		PlayerPrefs.SetInt("Level", 1);
 		PlayerPrefs.SetString("Levels","");
 	}
 
 	private void PlayerPrefs_continue(){
-		PlayerPrefs.SetInt("Money",PlayerPrefs.GetInt("Money") == null ? 200 : PlayerPrefs.GetInt("Money"));
-		PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level") == null ? 1 : PlayerPrefs.GetInt("Level"));
-		PlayerPrefs.SetString("Levels",PlayerPrefs.GetString("Levels") == null ? "" : PlayerPrefs.GetString("Levels"));
+		PP_Money = (PP_Money == null) ? 200 : PP_Money;
+		PP_Level = (PP_Level == null) ? 1 : PP_Level;
+		PP_Levels = (PP_Levels == null) ? "" : PP_Levels;
 	}
 
 	public static void LoadScene (string w){
 		SceneManager.LoadScene (w);
+	}
+
+	public static int[] UniqItem(int[] x){
+		int temp;
+		
+		for (int i = 0; i < x.Length; i++)
+			for (int j = i + 1; j < x.Length; j++)
+				if (x[i] > x[j]) {
+					temp = x[i];
+					x[i] = x[j];
+					x[j] = temp;
+				}
+				
+		int[] nx = x.Distinct().ToArray();
+
+		return nx;
 	}
 
 }

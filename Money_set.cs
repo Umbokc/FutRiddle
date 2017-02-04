@@ -7,8 +7,7 @@ public class Money_set : MonoBehaviour {
 
 	private TextMesh money;
 
-	private static int numMoney;
-	private static bool set_money = false;
+	public static bool set_money = false;
 
 	private float startpos_money;
 	private float startpos_cart;
@@ -17,12 +16,10 @@ public class Money_set : MonoBehaviour {
 
 		money = GetComponent<TextMesh> ();
 
-		numMoney = PlayerPrefs.GetInt("Money");
-		
 		startpos_money = money.transform.position.x;
 		startpos_cart = cart.transform.position.x;
 
-		SetMoney(numMoney);
+		set_money = true;
 	}
 
 	void Update () {
@@ -30,18 +27,11 @@ public class Money_set : MonoBehaviour {
 
 			set_money = !set_money;
 
-			money.text = numMoney.ToString ();
-
-			PlayerPrefs.SetInt("Money",numMoney);
-
+			money.text = U.PP_Money.ToString ();
+			
 			set_pos_x(money.gameObject, startpos_money);
 			set_pos_x(cart, startpos_cart);
 		}
-	}
-
-	public static void SetMoney(int num_money){
-		numMoney = num_money;
-		set_money = true;
 	}
 
 	void set_pos_x (GameObject go, float startpos) {

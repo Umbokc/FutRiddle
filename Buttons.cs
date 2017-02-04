@@ -49,6 +49,8 @@ public class Buttons : MonoBehaviour {
 				U.LevelAllObj.SetActive (true);
 				// загадка
 				U.TheLevel.SetActive (true);
+				// спрайт
+				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/Uroven-" + U.current_level);
 				// ответ (видны только пройденные)
 				U.Answer.SetActive (false);
 				
@@ -76,7 +78,7 @@ public class Buttons : MonoBehaviour {
 				}
 				break;
 			case TheButton.FreeCoins: 
-				U.Money = U.Money + 20;
+				U.PP_Money += 100;
 				break;
 			case TheButton.leaderboard: break;
 			case TheButton.sound: break;
@@ -93,17 +95,16 @@ public class Buttons : MonoBehaviour {
 
 				U.TheLevel.SetActive (true);
 
-				// U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = U.LevelsImg[U.current_level];
 				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/Uroven-" + U.current_level);
 				U.GAME_STARTED = 1;
 
 				break;
 			case TheButton.charAdd:
-				if(U.Money >= 100){
+				if(U.PP_Money >= 100){
 					string chr = U._LEVELS_ANSWER[U.current_level-1][U.What_button_Enter].ToString().ToUpper();
 
 					U._FIELD_ANSWER_CHARS[U.What_button_Enter].gameObject.GetComponentInChildren<TextMesh>().text = chr;
-					CharsClickValid.Check_char();
+					CharsClickValid.check_char = true;
 
 
 					for(int i = 0; i < U._LEVELS_CHARS[U.current_level-1].Length; i++ ){
@@ -113,8 +114,7 @@ public class Buttons : MonoBehaviour {
 						}
 					}
 
-					U.What_button_Enter++;
-					U.Money -= 100;
+					U.PP_Money -= 100;
 				}
 				break;
 			case TheButton.charSub: break;
