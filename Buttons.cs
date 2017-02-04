@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Buttons : MonoBehaviour {
+public class Buttons : ClickButton {
 	
 	public TheButton theButton;
 
@@ -99,25 +99,6 @@ public class Buttons : MonoBehaviour {
 				U.GAME_STARTED = 1;
 
 				break;
-			case TheButton.charAdd:
-				if(U.PP_Money >= 100){
-					string chr = U._LEVELS_ANSWER[U.current_level-1][U.What_button_Enter].ToString().ToUpper();
-
-					U._FIELD_ANSWER_CHARS[U.What_button_Enter].gameObject.GetComponentInChildren<TextMesh>().text = chr;
-					CharsClickValid.check_char = true;
-
-
-					for(int i = 0; i < U._LEVELS_CHARS[U.current_level-1].Length; i++ ){
-						if(U._LEVELS_CHARS[U.current_level-1][i].ToString().ToUpper() == chr){
-							Destroy(U._ENTER_CHARS[i]);
-							break;
-						}
-					}
-
-					U.PP_Money -= 100;
-				}
-				break;
-			case TheButton.charSub: break;
 		}
 	}
 
@@ -139,7 +120,5 @@ public enum TheButton {
 	contacts,
 	next,
 	back,
-	startGame,
-	charAdd,
-	charSub
+	startGame
 }

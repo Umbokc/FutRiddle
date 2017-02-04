@@ -34,12 +34,18 @@ public class BuildFieldAndChar : MonoBehaviour {
 	void SetFieldAnswerChars (){
 
 		// удаляем обьекты предыдущего уровня, если они есть
-		foreach(GameObject go in U._FIELD_ANSWER_CHARS){
-			Destroy(go);
+		for(int k = 0; k < U._FIELD_ANSWER_CHARS.transform.childCount; k++ ){
+			Destroy(U._FIELD_ANSWER_CHARS.transform.GetChild (k).gameObject);
 		}
 
 		// получаем колличество символов ответа
 		int len_word = U._LEVELS_ANSWER[U.current_level-1].Length;
+
+		bool[] how_btn = new bool[len_word];
+		
+		for(int ki = 0; ki < len_word; ki++) how_btn[ki] = false;
+
+		U.HOW_BUTTONS_DONE = how_btn;
 
 		// исходя из длины ответа выбираем координаты обьектов куда будет прописаться ответ
 		float[] _FIELD_ANSWER_CHARS_COORD = (len_word == 3) ? _FIELD_ANSWER_CHARS_COORD_X_3 :
@@ -49,6 +55,7 @@ public class BuildFieldAndChar : MonoBehaviour {
 											(len_word == 7) ? _FIELD_ANSWER_CHARS_COORD_X_7 :  
 											(len_word == 8) ? _FIELD_ANSWER_CHARS_COORD_X_8 : 
 											null;
+
 
 		int i = 0;
 		// получем поле для отображения введенного символа 
@@ -60,15 +67,18 @@ public class BuildFieldAndChar : MonoBehaviour {
 			// создание обьекта
 			GameObject go = Instantiate(entr,crd,Quaternion.identity) as GameObject;
 			// присвоение обьекту родителя
-			go.transform.SetParent (U.TheLevel.transform);
-			// запись обьекта в глобальный массив
-			U._FIELD_ANSWER_CHARS[i] = go;
+			go.transform.SetParent (U._FIELD_ANSWER_CHARS.transform);
 			
 			i++;
 		}
 	}
 
 	void SetChars () {
+
+		for(int k = 0; k < U._ENTER_CHARS.transform.childCount; k++ ){
+			Destroy(U._FIELD_ANSWER_CHARS.transform.GetChild (k).gameObject);
+			// U._ENTER_CHARS.transform.GetChild (k).gameObject.GetComponent<ClickChar>().Destroy_the();
+		}
 
 		int i = 0;
 		// получем обьекты буквы 
@@ -82,14 +92,12 @@ public class BuildFieldAndChar : MonoBehaviour {
 				// создание обьекта
 				GameObject go = Instantiate(entr,crd,Quaternion.identity) as GameObject;
 				// присвоение обьекту родителя
-				go.transform.SetParent (U.TheLevel.transform);
+				go.transform.SetParent (U._ENTER_CHARS.transform);
 				// получаем дочерний обьект буквы в виде текста 
 				TextMesh TheChar = go.GetComponentInChildren<TextMesh>();
 				// изменяем символ
 				TheChar.text = U._LEVELS_CHARS[U.current_level-1][i].ToString().ToUpper();
-				// запись обьекта в глобальный массив
-				U._ENTER_CHARS[i] = go;
-				
+
 				i++;
 			}
 		}

@@ -45,6 +45,8 @@ public class U : MonoBehaviour {
 
 	public static bool WHILE_TRUE_ANSWER = true;
 
+	public static bool[] HOW_BUTTONS_DONE;
+
 	// -1 - идет игра
 	// 	0 - начальный режим
 	//  1 - строим поля для ввода ответа, строим нужные для уровня буквы и прописываем вних символы (BuildFieldAndChar)
@@ -56,7 +58,7 @@ public class U : MonoBehaviour {
 	public static bool MoveLevel_back = false;
 	public static bool MoveLevel_next = false;
 
-	public static int[] opened_levels = new int[25];
+	public static int[] opened_levels;
 
 	public static int PP_Money {
 		set { 
@@ -97,8 +99,11 @@ public class U : MonoBehaviour {
 	// какая по счету была нажата буква
 	public static int What_button_Enter = 0;
 
-	public static GameObject[] _ENTER_CHARS = new GameObject[14];
-	public static GameObject[] _FIELD_ANSWER_CHARS = new GameObject[8];
+	public GameObject ENTER_CHARS;
+	public static GameObject _ENTER_CHARS;
+
+	public GameObject FIELD_ANSWER_CHARS;
+	public static GameObject _FIELD_ANSWER_CHARS;
 
 	void Awake () {
 		// crete static variable
@@ -113,7 +118,10 @@ public class U : MonoBehaviour {
 
 		UISwipe = _UISwipe;
 
-		int Reset = 0;
+		_ENTER_CHARS = ENTER_CHARS;
+		_FIELD_ANSWER_CHARS = FIELD_ANSWER_CHARS;
+
+		int Reset = 1;
  
 		if(Reset == 1){
 			PlayerPrefs_reset();
@@ -124,7 +132,7 @@ public class U : MonoBehaviour {
 		current_level = PP_Level;
 		// Debug.Log(PP_Level);
 		
-		Debug.Log(PP_Levels);
+		// Debug.Log(PP_Levels);
 
 		opened_levels = StringToArr(PP_Levels);
 
@@ -209,6 +217,17 @@ public class U : MonoBehaviour {
 		int[] nx = x.Distinct().ToArray();
 
 		return nx;
+	}
+}
+
+public class ClickButton : MonoBehaviour{
+
+	public void OnMouseDown(){
+		transform.localScale += new Vector3(0.05f,0.05f,0);
+	}
+
+	public void OnMouseUp(){
+		transform.localScale -= new Vector3(0.05f,0.05f,0);
 	}
 
 }

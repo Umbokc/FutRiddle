@@ -14,12 +14,22 @@ public class CharsClickValid : MonoBehaviour {
 
 	void Check_char (){
 		// проверяем совпадает ли введеный символ с сомволом из ответа если совпали предыдущие
-		if (U._FIELD_ANSWER_CHARS[U.What_button_Enter].gameObject.GetComponentInChildren<TextMesh>().text == U._LEVELS_ANSWER[U.current_level-1][U.What_button_Enter].ToString().ToUpper() && U.WHILE_TRUE_ANSWER){
+
+		if (U._FIELD_ANSWER_CHARS.transform.GetChild (U.What_button_Enter).gameObject.GetComponentInChildren<TextMesh>().text.ToString().ToUpper() == U._LEVELS_ANSWER[U.current_level-1][U.What_button_Enter].ToString().ToUpper()){
 			// если была введена последняя буква
 			if ((U.What_button_Enter+1) == U._LEVELS_ANSWER[U.current_level-1].Length){
 				// вызываем функциию в случае правильного ответа
-				// Invoke("TrueAnswer", 2);
-				TrueAnswer();
+				string answ = "";
+				GameObject go; 
+				for(int k = 0; k < U._FIELD_ANSWER_CHARS.transform.childCount; k++ ){
+					go = U._FIELD_ANSWER_CHARS.transform.GetChild (k).gameObject;
+					answ += go.GetComponentInChildren<TextMesh>().text.ToString().ToUpper();
+				}
+
+				if(answ == U._LEVELS_ANSWER[U.current_level-1].ToString().ToUpper()){
+					// Invoke("TrueAnswer", 2);
+					TrueAnswer();
+				}
 			}
 		} else {
 			Debug.Log("to fuck");
@@ -28,8 +38,6 @@ public class CharsClickValid : MonoBehaviour {
 				Debug.Log("fuck");
 				// U.LoadScene ("_main");
 			}
-			// если текушие буквы не совпали, то дальше нет смысла сравнивать
-			U.WHILE_TRUE_ANSWER = false;
 		}
 		// увеличаваем номер введенного символа 
 		U.What_button_Enter++;
@@ -41,8 +49,9 @@ public class CharsClickValid : MonoBehaviour {
 		// обнуляем номер введенной буквы
 		U.What_button_Enter = -1;
 		// удаляем обьекты предыдущего уровня, если они есть
-		foreach(GameObject go in U._ENTER_CHARS){
-			Destroy(go);
+		for(int i = 0; i < U._ENTER_CHARS.transform.childCount; i++){
+			Destroy(U._ENTER_CHARS.transform.GetChild (i).gameObject);
+			// U._ENTER_CHARS.transform.GetChild (i).gameObject.GetComponent<ClickChar>().Destroy_the();
 		}
 
 		// выбубаем ребус
