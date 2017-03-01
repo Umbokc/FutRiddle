@@ -12,23 +12,22 @@ public class ClickChar : ClickButton {
 	}
 
 	void OnMouseUpAsButton (){
+			U.CLickPlay();
 			TheClick();
 	}
 
 	public void TheClick(){
 		// если нажатых букв было меньше чет длина ответа то true
-		if (U.What_button_Enter < U._LEVELS_ANSWER[U.current_level-1].Length){
+		if (U.What_button_Enter < U._LEVELS_ANSWER[U.current_level-1].Length && !destroyed){
 			
-						
-			if(U.HOW_BUTTONS_DONE[U.What_button_Enter]){
 
-				for(int ki = 0; ki < U.HOW_BUTTONS_DONE.Length; ki++)
-					if(U.HOW_BUTTONS_DONE[ki]){
-						continue;
-					} else {
-						U.What_button_Enter = ki;
-						break;
-					}
+			for(int ki = 0; ki < U.HOW_BUTTONS_DONE.Length; ki++){
+				if(U.HOW_BUTTONS_DONE[ki]){
+					continue;
+				} else {
+					U.What_button_Enter = ki;
+					break;
+				}
 			}
 
 			// получем символ нажатой буквы
@@ -36,7 +35,37 @@ public class ClickChar : ClickButton {
 			// добаляем символ в поле для ответа
 			U._FIELD_ANSWER_CHARS.transform.GetChild (U.What_button_Enter).gameObject.GetComponentInChildren<TextMesh>().text = chr.text;
 
-			Debug.Log(U.HOW_BUTTONS_DONE[U.What_button_Enter] + ": " + U.What_button_Enter);
+
+			// буква есть
+			U.HOW_BUTTONS_DONE[U.What_button_Enter] = true;
+
+
+			// вызываем проверку символов
+			CharsClickValid.check_char = true;
+
+			Destroy_the();
+		}
+	}
+
+	public void TheClick_add_and_edit(){
+		// если нажатых букв было меньше чет длина ответа то true
+		if (U.What_button_Enter < U._LEVELS_ANSWER[U.current_level-1].Length && !destroyed){
+			
+
+			for(int ki = 0; ki < U.HOW_BUTTONS_DONE.Length; ki++){
+				if(U.HOW_BUTTONS_DONE[ki]){
+					continue;
+				} else {
+					U.What_button_Enter = ki;
+					break;
+				}
+			}
+
+			// получем символ нажатой буквы
+			TextMesh chr = GetComponentInChildren<TextMesh>();
+			// добаляем символ в поле для ответа
+			U._FIELD_ANSWER_CHARS.transform.GetChild (U.What_button_Enter).gameObject.GetComponentInChildren<TextMesh>().text = chr.text;
+
 
 			// буква есть
 			U.HOW_BUTTONS_DONE[U.What_button_Enter] = true;

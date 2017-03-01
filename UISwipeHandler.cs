@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
 
@@ -61,7 +61,10 @@ public class UISwipeHandler : MonoBehaviour, IBeginDragHandler, IPointerDownHand
 
 		U.current_country += indecr;
 		
-		string theCountry = (U.current_country == 1) ? "England" : (U.current_country == 2) ? "Germany" : "Spain";
+		string theCountry = (U.current_country == 1) ? "England" 
+											: (U.current_country == 2) ? "Germany" 
+											: (U.current_country == 3) ? "Spain" 
+											: "" ;
 
 		Country.sprite = Resources.Load<Sprite>("land/"+theCountry);
 		

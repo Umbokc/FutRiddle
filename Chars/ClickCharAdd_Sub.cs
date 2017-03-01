@@ -8,6 +8,7 @@ public class ClickCharAdd_Sub : ClickButton {
 	private static GameObject old;
 
 	void OnMouseUpAsButton (){
+		U.CLickPlay();
 		switch (theButton_add_sub){
 			case TheButton_add_sub.charAdd:
 				if(U.PP_Money >= 100){
@@ -21,8 +22,8 @@ public class ClickCharAdd_Sub : ClickButton {
 
 						go = U._ENTER_CHARS.transform.GetChild (i).gameObject;
 
-						if(go.GetComponentInChildren<TextMesh>().text.ToString().ToUpper() == chr){
-							go.GetComponent<ClickChar>().TheClick();
+						if(go.GetComponentInChildren<TextMesh>().text.ToString().ToUpper() == chr && !go.GetComponent<ClickChar>().destroyed){
+							go.GetComponent<ClickChar>().TheClick_add_and_edit();
 							// отнимаю 100 монет
 							U.PP_Money -= 100;
 							break;

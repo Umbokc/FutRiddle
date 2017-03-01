@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using UnityEngine.SceneManagement;
@@ -10,7 +10,7 @@ public class U : MonoBehaviour {
 
 	public GameObject _Main_scene;
 	public static GameObject Main_scene;
-	
+
 	// the settings elements
 	public GameObject _Settings;
 	public static GameObject Settings;
@@ -135,7 +135,6 @@ public class U : MonoBehaviour {
 		// Debug.Log(PP_Levels);
 
 		opened_levels = StringToArr(PP_Levels);
-
 	}
 
 	public static string ArrToStringUniq(int[] x){
@@ -201,6 +200,10 @@ public class U : MonoBehaviour {
 
 	public static void LoadScene (string w){
 		SceneManager.LoadScene (w);
+	}
+	
+	public static void CLickPlay (){
+		Camera.main.GetComponent<AudioSource> ().Play ();
 	}
 
 	public static int[] UniqItem(int[] x){

@@ -13,32 +13,27 @@ public class CharsClickValid : MonoBehaviour {
 	}
 
 	void Check_char (){
-		// проверяем совпадает ли введеный символ с сомволом из ответа если совпали предыдущие
 
-		if (U._FIELD_ANSWER_CHARS.transform.GetChild (U.What_button_Enter).gameObject.GetComponentInChildren<TextMesh>().text.ToString().ToUpper() == U._LEVELS_ANSWER[U.current_level-1][U.What_button_Enter].ToString().ToUpper()){
-			// если была введена последняя буква
-			if ((U.What_button_Enter+1) == U._LEVELS_ANSWER[U.current_level-1].Length){
-				// вызываем функциию в случае правильного ответа
-				string answ = "";
-				GameObject go; 
-				for(int k = 0; k < U._FIELD_ANSWER_CHARS.transform.childCount; k++ ){
-					go = U._FIELD_ANSWER_CHARS.transform.GetChild (k).gameObject;
-					answ += go.GetComponentInChildren<TextMesh>().text.ToString().ToUpper();
-				}
+		int how_btn = 0;
+		for(int ki = 0; ki < U.HOW_BUTTONS_DONE.Length; ki++) if(U.HOW_BUTTONS_DONE[ki]) how_btn++;
 
-				if(answ == U._LEVELS_ANSWER[U.current_level-1].ToString().ToUpper()){
-					// Invoke("TrueAnswer", 2);
-					TrueAnswer();
-				}
+		// Debug.Log(how_btn);
+		// если была введена последняя буква
+		if (how_btn == U._LEVELS_ANSWER[U.current_level-1].Length){
+			string answ = "";
+			GameObject go; 
+			for(int k = 0; k < U._FIELD_ANSWER_CHARS.transform.childCount; k++ ){
+				go = U._FIELD_ANSWER_CHARS.transform.GetChild (k).gameObject;
+				answ += go.GetComponentInChildren<TextMesh>().text.ToString().ToUpper();
 			}
-		} else {
-			Debug.Log("to fuck");
-			// если ведена последняя буква и отвт не верен то перезагружаем сцену 
-			if ((U.What_button_Enter+1) == U._LEVELS_ANSWER[U.current_level-1].Length){
-				Debug.Log("fuck");
-				// U.LoadScene ("_main");
+
+			// вызываем функциию в случае правильного ответа
+			if(answ == U._LEVELS_ANSWER[U.current_level-1].ToString().ToUpper()){
+				// Invoke("TrueAnswer", 2);
+				TrueAnswer();
 			}
 		}
+
 		// увеличаваем номер введенного символа 
 		U.What_button_Enter++;
 	}

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ClickField : ClickButton {
 
-
 	void OnMouseUpAsButton (){
+		U.CLickPlay();
 		if(gameObject.GetComponentInChildren<TextMesh>().text != ""){
 			
 			string chr = gameObject.GetComponentInChildren<TextMesh>().text.ToString().ToUpper();

@@ -37,6 +37,7 @@ public class Buttons : ClickButton {
 	}
 
 	void OnMouseUpAsButton (){
+		U.CLickPlay();
 		switch (theButton){
 			// нажатие на SelecLevel
 			case TheButton.SelecLevel: 
