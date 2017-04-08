@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Money_set : MonoBehaviour {
+public class MoneySet : MonoBehaviour {
 
 	public GameObject cart;
 

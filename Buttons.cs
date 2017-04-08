@@ -1,125 +1,109 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class Buttons : ClickButton {
+public class Buttons : MonoBehaviour {
 	
 	public TheButton theButton;
+	
+	public GameObject go_UISwipe;
 
-	private float speed = 4f; 
-
-	private Animation animSetting;
-	private Animation animLand;
-	private Animation animLevel;
-	private Animation animLevelAnswer;
+	private bool to_setting_ok = true;
 
 	void Start(){
-		animSetting = U.Settings.GetComponent<Animation>();
-		animLand = U.Main_scene.GetComponent<Animation>();
-		animLevel = U.TheLevel.GetComponent<Animation>();
-		animLevelAnswer = U.Answer.GetComponent<Animation>();
+
 	}
 
 	void Update(){
-	}
-
-	void OnMouseDown(){
-		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active) || theButton == TheButton.startGame)
-			return;
-		else
-			transform.localScale += new Vector3(0.05f,0.05f,0);
-	}
-
-	void OnMouseUp(){
-		if((theButton == TheButton.back && !U.Button_Back_Active) || (theButton == TheButton.next && !U.Button_Next_Active) || theButton == TheButton.startGame)
-			return;
-		else
-			transform.localScale -= new Vector3(0.05f,0.05f,0);
-	}
-
-	void OnMouseUpAsButton (){
-		U.CLickPlay();
-		switch (theButton){
-			// нажатие на SelecLevel
-			case TheButton.SelecLevel: 
-				// обработка свайпов для изменения страны 
-				U.UISwipe.SetActive (false);
-
-				// главное меню
-				U.Main_scene.SetActive (false);
-				// начало игры
-				U.LevelAllObj.SetActive (true);
-				// загадка
-				U.TheLevel.SetActive (true);
-				// спрайт
-				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/Uroven-" + U.current_level);
-				// ответ (видны только пройденные)
-				U.Answer.SetActive (false);
-				
-				U.GAME_STARTED = 1;
-
-				break;
-			case TheButton.ToSetting:
-				if (!animSetting["ToDown"].enabled){
-					
-					U.Settings_active = !U.Settings_active;
-
-					if (U.Settings_active)
-						U.UISwipe.SetActive (false);
-					else 
-						U.UISwipe.SetActive (true);
-
-					ToSettingAndBack(animSetting);
-
-					if (U.TheLevel.active)
-						ToSettingAndBack(animLevel);
-					else if (U.Answer.active)
-						ToSettingAndBack(animLevelAnswer);
-					else
-						ToSettingAndBack(animLand);
-				}
-				break;
-			case TheButton.FreeCoins: 
-				U.PP_Money += 100;
-				break;
-			case TheButton.leaderboard: break;
-			case TheButton.sound: break;
-			case TheButton.about: break;
-			case TheButton.contacts: break;
-			case TheButton.next:
-				if(U.Button_Next_Active) U.MoveLevel_next = true;
-				break;
-			case TheButton.back:
-				if(U.Button_Back_Active) U.MoveLevel_back = true;
-				break;
-			case TheButton.startGame:
-				U.Answer.SetActive (false);
-
-				U.TheLevel.SetActive (true);
-
-				U.RiddleSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/Uroven-" + U.current_level);
-				U.GAME_STARTED = 1;
-
-				break;
+		if(U.GAME_STATUS == 2){
+			Start_level();
+			U.GAME_STATUS = 3;
 		}
 	}
 
-	void ToSettingAndBack(Animation anim) {
-		anim["ToDown"].time = U.Settings_active ? 0 : anim["ToDown"].length;
-		anim["ToDown"].speed = U.Settings_active ? 1 : -1;
-
-		anim.Play ("ToDown");
+	void OnMouseDown(){
+		if(theButton == TheButton.SpriteAnswer || !UISwipe.tomove_ok)
+			return;
+		else
+		transform.localScale += new Vector3(0.05f,0.05f,0);
 	}
+
+	void OnMouseUp(){
+		if(theButton == TheButton.SpriteAnswer || !UISwipe.tomove_ok)
+			return;
+		else
+		transform.localScale -= new Vector3(0.05f,0.05f,0);
+	}
+
+	void OnMouseUpAsButton (){
+		if(!UISwipe.tomove_ok || !to_setting_ok)
+			return;
+
+		if(theButton != TheButton.SpriteAnswer)
+			Camera.main.GetComponent<AudioSource> ().Play ();
+		
+		//  начало уровня
+		if( theButton == TheButton.SelecLevel &&  U.GAME_STATUS != 1) U.GAME_STATUS = 1;
+		// if( theButton == TheButton.SelecLevel) transform.localScale = new Vector3(0.5241089f,0.5241089f,0);
+		
+		if(theButton == TheButton.ToSetting) ToSetting();
+
+		if( theButton == TheButton.FreeCoins) U.PP_Money += 25;
+
+		if( theButton == TheButton.leaderboard) {Debug.Log("leaderboard"); }
+		if( theButton == TheButton.sound) {Debug.Log("sound"); }
+		if( theButton == TheButton.about) {Debug.Log("about"); }
+		if( theButton == TheButton.contacts) {Debug.Log("contacts"); }
+
+		if( theButton == TheButton.next &&  U.GAME_STATUS != 5) U.GAME_STATUS = 5;
+		// if( theButton == TheButton.back) U.BackLevel_btn = true;
+		if( theButton == TheButton.back) Retry_game();
+	}
+
+
+	void Start_level(){
+
+		go_UISwipe.SetActive (false);
+		
+		U.Level.SetActive(true);
+
+		U.Anim_go(U.Level.GetComponent<Animation>(), "ShowLevel", true);
+		U.Anim_go(U.Land.GetComponent<Animation>(), "ToRightMain", true);
+	}
+
+	// показ и скрытие настроек
+	void ToSetting() {
+		
+		to_setting_ok = false;
+		
+		U.Settings_active = !U.Settings_active;
+
+		if(U.Settings_active) U.Settings.SetActive(true);
+
+		
+		if(U.GAME_STATUS == 3){
+			U.Anim_go(U.Level.GetComponent<Animation>(), "ToRightLevel", (U.Settings_active) ? true : false);
+		} else {
+			go_UISwipe.SetActive ((U.Settings_active) ? false : true);
+			U.Anim_go(U.Land.GetComponent<Animation>(), "ToRightMain", (U.Settings_active) ? true : false);
+		}
+		
+		U.Anim_go(U.Settings.GetComponent<Animation>(), "ShowSettings", (U.Settings_active) ? true : false);
+
+		if(!U.Settings_active) Invoke("Settings_false", 0.6f);
+
+		Invoke("To_setting_ok_change", 0.6f);
+	}
+
+	void To_setting_ok_change(){to_setting_ok = true;}
+
+	void Retry_game() {
+
+	}
+
+	void Settings_false(){
+		U.Settings.SetActive(false);
+	}
+
 }
 
-public enum TheButton {
-	SelecLevel,
-	ToSetting,
-	FreeCoins,
-	leaderboard,
-	sound,
-	about,
-	contacts,
-	next,
-	back,
-	startGame
-}
+public enum TheButton {SelecLevel, ToSetting, FreeCoins, leaderboard, sound, about, contacts, next, back, SpriteAnswer}
