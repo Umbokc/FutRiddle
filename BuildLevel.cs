@@ -11,7 +11,7 @@ public class BuildLevel : MonoBehaviour {
 	public GameObject Level_text;
 	public GameObject Answer;
 	public GameObject EnterChars;
-	public GameObject Riddle_block;
+	public GameObject Riddle;
 	
 	public GameObject Next_btn;
 	public GameObject Back_btn;
@@ -39,8 +39,8 @@ public class BuildLevel : MonoBehaviour {
 			U.GAME_STATUS = 2;
 		}
 		if(U.GAME_STATUS == 5){
-			Retry_lelvel();
-			U.GAME_STATUS  = 0;
+			ToNextLevel();
+			U.GAME_STATUS  = 3;
 		}
 	}
 
@@ -95,41 +95,38 @@ public class BuildLevel : MonoBehaviour {
 		bg_level.sprite = Resources.Load<Sprite>("levels/"+ U.Global_Level.ToString() + "/bg");
 	}
 
-	void Retry_lelvel(){
+	void ToNextLevel(){
 
 		U.current_level = U.PP_Level;
-		
-		// 
-		Riddle_block.GetComponent<Animation>().Play("ToNextLevel");
 
 		// Level_text.text = "LEVEL " + U.current_level.ToString() + "/30";
-		
-		riddleimg.SetActive(true);
-		Answer.SetActive(false);
 
 		riddleimg.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/"+ U.Global_Level.ToString() +"/uroven-"+ U.current_level.ToString());
 		
-		// строим поля для ввода ответа
+		// // строим поля для ввода ответа
 		SetFieldAnswerChars ();
 
-		U.tp_to(U._FIELD_ANSWER_CHARS, 999, 0);
+		// U.tp_to(U._FIELD_ANSWER_CHARS, 999, 0);
 
 		// клава
 		SetChars();
-		EnterChars.SetActive(true);
-
-		U.Level.GetComponent<Animation>().Play("ToNextLevel_2");
 		
-		// передаем эстафету дальше
+		Riddle.SetActive(true);
+
+		// анимаци 
+		Riddle.GetComponent<Animation>().Play("ToNextLevel_Riddle");
+		Answer.GetComponent<Animation>().Play("ToNextLevel_Answer");
+
+		Invoke("answer_to_place", 0.6f);
+
+		// // передаем эстафету дальше
 		U.GAME_STATUS = 3;
-
-		U.tp_to(Next_btn, 3.829f);
-		U.tp_to(Back_btn, -3.829f);
-
 	}
 
-	public void PrintFloat (float theValue) {
-    Debug.Log ("PrintFloat is called with a value of " + theValue);
+	void answer_to_place(){
+		U.tp_to(Answer, 0);
+		Answer.SetActive(false);
+		Destroy(U._FIELD_ANSWER_CHARS_CLONE);
 	}
 
 }

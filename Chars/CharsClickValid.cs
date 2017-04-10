@@ -5,6 +5,7 @@ using System.Collections;
 public class CharsClickValid : MonoBehaviour {
 
 	public GameObject Answer;
+	public GameObject Riddle;
 
 	public GameObject Chars;
 	public GameObject RiddleSprite;
@@ -21,7 +22,7 @@ public class CharsClickValid : MonoBehaviour {
 
 
 	void Start() {
-		AnswerImg = Answer.transform.Find("Answer").gameObject;
+		AnswerImg = Answer.transform.Find("AnswerImg").gameObject;
 		Next_btn = Answer.transform.Find("Buttons/next").gameObject;
 		Back_btn = Answer.transform.Find("Buttons/back").gameObject;
 	}
@@ -68,24 +69,32 @@ public class CharsClickValid : MonoBehaviour {
 		// обнуляем номер введенной буквы
 		U.What_button_Enter = -1;
 
+		// включаю ответ
 		Answer.SetActive (true);
 
+		// меняю спрайт 
 		AnswerImg.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/"+ U.Global_Level.ToString() +"/answer/"+ U.current_level.ToString());;
+
+		// показываем ответ, анимация
+		// Riddle.GetComponent<Animation>().Play("ShowAnswerToRight_Riddle");
+		Answer.GetComponent<Animation>().Play("ShowAnswer_Answer");
 		
+		// центрирую картинку
 		U.tp_to(AnswerImg, _COORDINATE_ANSWER_IMG_X[U.Global_Level-1,U.current_level-1]);
 
-		// опускаем спрайт с ответом
-		AnswerImg.GetComponent<Animation>().Play ("ShowAnswer");
-		// показываем буквы
-		Next_btn.GetComponent<Animation>().Play ("Next_btn");
-		Back_btn.GetComponent<Animation>().Play ("Back_btn");
+		Riddle.SetActive (false);
 
 		// выключаю клаву
-		Chars.SetActive (false);
+		// Chars.SetActive (false);
 		// выключаем риддл
-		RiddleSprite.SetActive(false);
-		// опускаем поля с ответом
-		StartCoroutine(U.Down(U._FIELD_ANSWER_CHARS.transform, 1.5f));
+		// RiddleSprite.SetActive(false);
+
+		// создаю клон,
+		U._FIELD_ANSWER_CHARS_CLONE = Instantiate(U._FIELD_ANSWER_CHARS, U._FIELD_ANSWER_CHARS.transform.position, Quaternion.identity) as GameObject;
+		// двигаю его вниз
+		StartCoroutine(U.Down(U._FIELD_ANSWER_CHARS_CLONE.transform, 1.5f));
+		// даю ему родителя - блок "ответ"
+		U._FIELD_ANSWER_CHARS_CLONE.transform.SetParent (Answer.transform);
 		
 		// переводи в начальный режим 
 		U.GAME_STATUS = 4;

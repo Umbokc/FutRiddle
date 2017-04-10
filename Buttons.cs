@@ -66,8 +66,8 @@ public class Buttons : MonoBehaviour {
 		
 		U.Level.SetActive(true);
 
-		U.Anim_go(U.Level.GetComponent<Animation>(), "ShowLevel", true);
-		U.Anim_go(U.Land.GetComponent<Animation>(), "ToRightMain", true);
+		U.Anim_go(U.Level.GetComponent<Animation>(), "ShowLevel_Level", true);
+		U.Anim_go(U.Land.GetComponent<Animation>(), "ToRight_Main", true);
 	}
 
 	// показ и скрытие настроек
@@ -80,14 +80,14 @@ public class Buttons : MonoBehaviour {
 		if(U.Settings_active) U.Settings.SetActive(true);
 
 		
-		if(U.GAME_STATUS == 3){
-			U.Anim_go(U.Level.GetComponent<Animation>(), "ToRightLevel", (U.Settings_active) ? true : false);
-		} else {
+		if(U.GAME_STATUS == 0){
 			go_UISwipe.SetActive ((U.Settings_active) ? false : true);
-			U.Anim_go(U.Land.GetComponent<Animation>(), "ToRightMain", (U.Settings_active) ? true : false);
+			U.Anim_go(U.Land.GetComponent<Animation>(), "ToRight_Main", (U.Settings_active) ? true : false);
+		} else {
+			U.Anim_go(U.Level.GetComponent<Animation>(), "ToRight_Level", (U.Settings_active) ? true : false);
 		}
 		
-		U.Anim_go(U.Settings.GetComponent<Animation>(), "ShowSettings", (U.Settings_active) ? true : false);
+		U.Anim_go(U.Settings.GetComponent<Animation>(), "Show_Settings", (U.Settings_active) ? true : false);
 
 		if(!U.Settings_active) Invoke("Settings_false", 0.6f);
 

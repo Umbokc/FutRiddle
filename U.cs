@@ -103,6 +103,8 @@ public class U : MonoBehaviour {
 
 	public GameObject FIELD_ANSWER_CHARS;
 	public static GameObject _FIELD_ANSWER_CHARS;
+	public static GameObject _FIELD_ANSWER_CHARS_CLONE;
+
 	void Awake () {
 		Level = _Level;
 		Land = _Land;
