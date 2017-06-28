@@ -84,6 +84,10 @@ public class CharsClickValid : MonoBehaviour {
 
 		Riddle.SetActive (false);
 
+		U.Dont_Touch = true;
+
+		Invoke("Dont_Touch", 0.6f);
+
 		// выключаю клаву
 		// Chars.SetActive (false);
 		// выключаем риддл
@@ -113,5 +117,9 @@ public class CharsClickValid : MonoBehaviour {
 
 		// записываем значение в player prefs
 		U.PP_Levels = U.ArrToStringUniq(U.opened_levels);
+	}
+
+	void Dont_Touch (){
+		U.Dont_Touch = false;
 	}
 }

@@ -35,7 +35,7 @@ public class Buttons : MonoBehaviour {
 	}
 
 	void OnMouseUpAsButton (){
-		if(!UISwipe.tomove_ok || !to_setting_ok)
+		if(!UISwipe.tomove_ok || !to_setting_ok || U.Dont_Touch)
 			return;
 
 		if(theButton != TheButton.SpriteAnswer)
@@ -68,6 +68,7 @@ public class Buttons : MonoBehaviour {
 
 		U.Anim_go(U.Level.GetComponent<Animation>(), "ShowLevel_Level", true);
 		U.Anim_go(U.Land.GetComponent<Animation>(), "ToRight_Main", true);
+
 	}
 
 	// показ и скрытие настроек

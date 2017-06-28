@@ -52,7 +52,7 @@ public class U : MonoBehaviour {
 			"nkfupexbgoryce", "jsfthunaronecm", "lsfthunaronecm", "okiuptxbgarece", "ifaosptraendkd", "nklupaxbgorycd", "okiuptxbcareme",
 			"madshpetqenyio", "inaosrtraenwke", "okirpgxbcareme", "ifaosphraendzd", "isfthpnaronecm", "wnaosctraenike", "skirpgubcareme",
 			"lkiupwxbgarece", "jkfraiozgonuca", "amdshcetmenyis", "ieaospbralndzy", "acdspletieuyis", "nsfthejarolpcm", "fsgthpnaronvcm",
-			"gkirpgubmazeqe", "bnaoecsraeniko", "bkeriboltonega", "ieaosperabndzh", "tnaoechrmeniko", "mnalsctrdenike", "ieaospgyrbndzw",
+			"gkirpgubmazeoe", "bnaoecsraeniko", "bkeriboltonega", "ieaosperabndzh", "tnaoechrmeniko", "mnalsctrdenike", "ieaospgyrbndzw",
 			"tnaoecernebikb", "lmdshbetoeneis"
 		},
 		{
@@ -96,6 +96,8 @@ public class U : MonoBehaviour {
 	}
 
 	public static bool Settings_active = false;
+
+	public static bool Dont_Touch = false;
 
 
 	public GameObject ENTER_CHARS;

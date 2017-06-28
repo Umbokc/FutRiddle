@@ -16,13 +16,15 @@ public class BuildLevel : MonoBehaviour {
 	public GameObject Next_btn;
 	public GameObject Back_btn;
 
+	private float Anim_Time = 0.6f;
+
 	void Start () {
 	}
-	
+
 	void Update () {
 		if(U.GAME_STATUS == 1){
 			
-			// Level_text.text = "LEVEL " + U.current_level.ToString() + "/30";
+			Invoke("LevelText", Anim_Time);
 
 			// Фон
 			SetBg();
@@ -39,6 +41,7 @@ public class BuildLevel : MonoBehaviour {
 			U.GAME_STATUS = 2;
 		}
 		if(U.GAME_STATUS == 5){
+			Invoke("LevelText", Anim_Time);
 			ToNextLevel();
 			U.GAME_STATUS  = 3;
 		}
@@ -87,7 +90,7 @@ public class BuildLevel : MonoBehaviour {
 		bg_change.GetComponent<Image>().sprite = Resources.Load<Sprite>("levels/"+ U.Global_Level.ToString() + "/bg");
 		bg_change.SetActive(true);
 		bg_change.GetComponent<Animation>().Play("Change_bg");
-		Invoke("End_SetBg", 0.6f);
+		Invoke("End_SetBg", Anim_Time);
 	}
 
 	void End_SetBg(){
@@ -98,8 +101,6 @@ public class BuildLevel : MonoBehaviour {
 	void ToNextLevel(){
 
 		U.current_level = U.PP_Level;
-
-		// Level_text.text = "LEVEL " + U.current_level.ToString() + "/30";
 
 		riddleimg.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("levels/"+ U.Global_Level.ToString() +"/uroven-"+ U.current_level.ToString());
 		
@@ -117,7 +118,7 @@ public class BuildLevel : MonoBehaviour {
 		Riddle.GetComponent<Animation>().Play("ToNextLevel_Riddle");
 		Answer.GetComponent<Animation>().Play("ToNextLevel_Answer");
 
-		Invoke("answer_to_place", 0.6f);
+		Invoke("answer_to_place", Anim_Time);
 
 		// // передаем эстафету дальше
 		U.GAME_STATUS = 3;
@@ -127,6 +128,25 @@ public class BuildLevel : MonoBehaviour {
 		U.tp_to(Answer, 0);
 		Answer.SetActive(false);
 		Destroy(U._FIELD_ANSWER_CHARS_CLONE);
+	}
+
+	void LevelText(){
+
+		Level_text.SetActive(true);
+
+		Level_text.GetComponentInChildren<TextMesh>().text = 	U.current_level.ToString() + "/30";
+
+		U.Anim_go(Level_text.GetComponent<Animation>(), "ToggleColor_LevelText");
+		
+		Invoke("LevelText_hide", 3f);
+	}
+
+	void LevelText_hide(){
+		U.Anim_go(Level_text.GetComponent<Animation>(), "ToggleColor_LevelText", false);
+		Invoke("LevelText_false", Anim_Time);
+	}
+	void LevelText_false(){
+		Level_text.SetActive(false);
 	}
 
 }
